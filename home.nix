@@ -33,6 +33,8 @@
     python3
     watchman
   ];
+  
+  programs.bash.enable = true;
 
   # basic configuration of git, please change to your own
   programs.git = {
@@ -47,6 +49,19 @@
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
 			push = { autoSetupRemote = true; };
+    };
+  };
+  
+  # https://github.com/K1aymore/Nixos-Config/blob/master/packages/coding.nix
+	# https://github.com/thomashoneyman/.dotfiles/blob/69d61ae8650f12f123d375534714c78a3095fb0e/modules/programs/default.nix
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      dracula-theme.theme-dracula
+      ms-python.python
+    ];
+    userSettings = {
+      "editor.minimap.enabled" = false;
     };
   };
 
@@ -74,22 +89,6 @@
       };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
-    };
-  };
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    # TODO add your custom bashrc here
-    bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-    '';
-
-    # set some aliases, feel free to add more or remove some
-    shellAliases = {
-      k = "kubectl";
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
     };
   };
 
