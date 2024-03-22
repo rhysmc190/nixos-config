@@ -6,3 +6,8 @@
 1. `sudo ln -s ~/nixos-config /etc/nixos`
 1. update hardware config from /etc/nixos.bak to ~/nixos-config if necessary
 1. `sudo nixos-rebuild switch`
+
+### Troubleshooting
+
+`error: ... ***-source/*.nix: file or directory does not exist`:
+try: `git add .`

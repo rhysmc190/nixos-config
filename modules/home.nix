@@ -59,9 +59,18 @@
     extensions = with pkgs.vscode-extensions; [
       dracula-theme.theme-dracula
       ms-python.python
+      jnoortheen.nix-ide
     ];
     userSettings = {
       "editor.minimap.enabled" = false;
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "nil";
+      "nix.formatterPath" = "nixpkgs-fmt";
+      "nix.serverSettings" = {
+        "nil" = {
+          "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
+        };
+      };
     };
   };
 

@@ -2,25 +2,28 @@
   description = "A simple NixOS flake";
 
   inputs = {
-    # NixOS official package source, using the nixos-23.11 branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-			url = "github:nix-community/home-manager/release-23.11";
+			url = "github:nix-community/home-manager";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  	nixosModules = {
+  		gnome = import ./modules/gnome.nix;
+  		declarativeHome = import ./modules/declarativeHome.nix;
+  	};
+  
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [
+      modules = with self.nixosModules; [
+      	#({ config = { nix.registry.nixpkgs.flake = nixpkgs; }; })
         ./configuration.nix
         home-manager.nixosModules.home-manager
-        {
-        	home-manager.useGlobalPkgs = true;
-        	home-manager.useUserPackages = true;
-        	home-manager.users.rhys = import ./home.nix;
-      	}
+        gnome
+        declarativeHome
       ];
     };
   };
