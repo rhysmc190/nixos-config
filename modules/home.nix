@@ -21,7 +21,7 @@
   # '';
 
   # Packages that should be installed to the user profile.
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     #android-sdk
     #android-tools
     caprine-bin
@@ -30,9 +30,18 @@
     google-chrome
     nodejs_20
     nodePackages.eas-cli
+    palenight-theme
     python3
+    spotify
     watchman
-  ];
+  ]) ++ (with pkgs.gnomeExtensions; [
+    blur-my-shell
+    dash-to-panel
+    gsconnect
+    tray-icons-reloaded
+    user-themes
+    vitals
+  ]);
   
   programs.bash.enable = true;
 
@@ -63,14 +72,14 @@
     ];
     userSettings = {
       "editor.minimap.enabled" = false;
-      "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "nil";
-      "nix.formatterPath" = "nixpkgs-fmt";
-      "nix.serverSettings" = {
-        "nil" = {
-          "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
-        };
-      };
+      "nix.enableLanguageServer" = false;
+      # "nix.serverPath" = "nil";
+      # "nix.formatterPath" = "nixpkgs-fmt";
+      # "nix.serverSettings" = {
+      #   "nil" = {
+      #     "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
+      #   };
+      # };
     };
   };
 
@@ -98,6 +107,49 @@
       };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      show-battery-percentage = true;
+      enable-hot-corners = false;
+      edge-tiling = true;
+    };
+    "org/gnome/settings-daemon/plugins/color" = {
+      night-light-enabled = true;
+    };
+    "org/gnome/shell" = {
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "firefox.desktop"
+        "org.gnome.Console.desktop"
+      ];
+      disable-user-extensions = false;
+
+      enabled-extensions = [
+        "blur-my-shell@aunetx"
+        "dash-to-panel@jderose9.github.com"
+        "gsconnect@andyholmes.github.io"
+        "trayIconsReloaded@selfmade.pl"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "Vitals@CoreCoding.com"
+      ];
+    };
+    "org/gnome/shell/extensions/user-theme" = {
+      name = "palenight";
+    };
+    "org/gnome/shell/extensions/dash-to-panel" = {
+      intellihide = true;
+      intellihide-hide-from-windows = true;
+      intellihide-behaviour = "FOCUSED_WINDOWS";
+      intellihide-show-in-fullscreen = true;
+    };
+    "org/gnome/mutter" = {
+      # enables fractional scaling, but:
+      # have to manually set scaling factor in settings gui, no way to set it here yet
+      experimental-features = [ "scale-monitor-framebuffer" ];
     };
   };
 
