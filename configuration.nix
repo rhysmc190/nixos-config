@@ -26,7 +26,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 8081 ]; # 80, 443 standard - 8081 open for expo go
+    allowedTCPPorts = [ 80 443 8081 9099 ]; # 80, 443 standard - 8081 open for expo go - 9099 firebase:emulators auth
   };
 
   # Set your time zone.
