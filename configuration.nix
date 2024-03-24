@@ -24,6 +24,11 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 443 8081 ]; # 80, 443 standard - 8081 open for expo go
+  };
+
   # Set your time zone.
   time.timeZone = "Australia/Sydney";
 
