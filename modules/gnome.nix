@@ -22,6 +22,8 @@
       yelp # Help view
       gnome-contacts
       gnome-initial-setup
+      simple-scan # Document Scanner
+      gnome-weather
     ]);
     programs.dconf.enable = true;
     environment.systemPackages = with pkgs; [
