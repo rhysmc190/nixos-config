@@ -72,6 +72,9 @@
     ];
     userSettings = {
       "editor.minimap.enabled" = false;
+      "editor.codeActionsOnSave"= {
+        "source.organizeImports"= "explicit";
+      };
       "nix.enableLanguageServer" = false;
       # "nix.serverPath" = "nil";
       # "nix.formatterPath" = "nixpkgs-fmt";
