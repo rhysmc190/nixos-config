@@ -10,4 +10,7 @@
 ### Troubleshooting
 
 `error: ... ***-source/*.nix: file or directory does not exist`:
-try: `git add .`
+try `git add .`
+
+`error: insufficient permission for adding an object to repository database .git/objects`:
+try `sudo chmod -R 777 .git`
