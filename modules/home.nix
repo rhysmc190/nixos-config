@@ -104,6 +104,7 @@
       show-battery-percentage = true;
       enable-hot-corners = false;
       edge-tiling = true;
+      clock-format = "12h";
     };
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
@@ -138,6 +139,9 @@
       # enables fractional scaling, but:
       # have to manually set scaling factor in settings gui, no way to set it here yet
       experimental-features = [ "scale-monitor-framebuffer" ];
+    };
+    "org/gtk/settings/file-chooser" = {
+      clock-format = "12h";
     };
   };
 
