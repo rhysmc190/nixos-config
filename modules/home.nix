@@ -73,7 +73,7 @@
     userSettings = {
       "editor.minimap.enabled" = false;
       "editor.codeActionsOnSave"= {
-        "source.organizeImports"= "explicit";
+        # "source.organizeImports"= "explicit";
       };
       "nix.enableLanguageServer" = false;
       # "nix.serverPath" = "nil";
