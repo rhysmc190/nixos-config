@@ -105,6 +105,7 @@
       enable-hot-corners = false;
       edge-tiling = true;
       clock-format = "12h";
+      clock-show-weekday = true;
     };
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
