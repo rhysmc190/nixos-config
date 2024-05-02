@@ -86,11 +86,13 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  virtualisation.docker.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rhys = {
     isNormalUser = true;
     description = "rhys";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
     #  thunderbird
@@ -99,9 +101,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  virtualisation.docker.enable = true;
-  users.users.rhys.extraGroups = [ "docker" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
