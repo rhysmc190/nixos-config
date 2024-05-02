@@ -100,6 +100,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  virtualisation.docker.enable = true;
+  users.users.rhys.extraGroups = [ "docker" ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
