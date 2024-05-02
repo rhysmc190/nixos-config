@@ -25,7 +25,7 @@
     #android-sdk
     #android-tools
     caprine-bin
-    firebase-tools
+    # firebase-tools
     firefox
     google-chrome
     nodejs_20
@@ -33,6 +33,7 @@
     palenight-theme
     python3
     spotify
+    supabase-cli
     watchman
   ]) ++ (with pkgs.gnomeExtensions; [
     blur-my-shell
