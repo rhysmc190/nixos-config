@@ -7,6 +7,11 @@
 1. update hardware config from /etc/nixos.bak to ~/nixos-config if necessary
 1. `sudo nixos-rebuild switch`
 
+### System Update
+
+`nix flake update`
+`sudo nixos-rebuild switch`
+
 ### Troubleshooting
 
 `error: ... ***-source/*.nix: file or directory does not exist`:
