@@ -68,10 +68,10 @@
     enable = true;
     extensions = with pkgs.vscode-extensions; [
       bierner.markdown-mermaid
-      bungcip.better-toml
       dracula-theme.theme-dracula
       jnoortheen.nix-ide
       ms-python.python
+      tamasfe.even-better-toml
     ];
     userSettings = {
       "editor.minimap.enabled" = false;
