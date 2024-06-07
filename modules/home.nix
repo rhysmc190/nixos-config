@@ -33,6 +33,7 @@
     palenight-theme
     python3
     spotify
+    steam
     supabase-cli
     watchman
   ]) ++ (with pkgs.gnomeExtensions; [
@@ -87,12 +88,6 @@
       #   };
       # };
     };
-  };
-
-  programs.steam = {
-    enable = true;
-    # remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    # dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
   # starship - an customizable prompt for any shell
