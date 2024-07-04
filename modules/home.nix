@@ -71,6 +71,7 @@
       bierner.markdown-mermaid
       dracula-theme.theme-dracula
       jnoortheen.nix-ide
+      Kelvin.vscode-sshfs
       ms-python.python
       tamasfe.even-better-toml
     ];
