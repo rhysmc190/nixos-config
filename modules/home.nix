@@ -33,7 +33,7 @@
     palenight-theme
     python3
     spotify
-    steam
+    #steam
     supabase-cli
     watchman
   ]) ++ (with pkgs.gnomeExtensions; [
@@ -79,7 +79,7 @@
       "editor.codeActionsOnSave"= {
         # "source.organizeImports"= "explicit";
       };
-      "nix.enableLanguageServer" = false;
+      "nix.enableLanguageServer" = true;
       # "nix.serverPath" = "nil";
       # "nix.formatterPath" = "nixpkgs-fmt";
       # "nix.serverSettings" = {
