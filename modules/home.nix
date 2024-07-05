@@ -67,20 +67,29 @@
 	# https://github.com/thomashoneyman/.dotfiles/blob/69d61ae8650f12f123d375534714c78a3095fb0e/modules/programs/default.nix
   programs.vscode = {
     enable = true;
+    enableExtensionUpdateCheck = false;
+    enableUpdateCheck = false;
+    mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions; [
       bierner.markdown-mermaid
       dracula-theme.theme-dracula
       jnoortheen.nix-ide
-      Kelvin.vscode-sshfs
       ms-python.python
       tamasfe.even-better-toml
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+     {
+       name = "vscode-sshfs";
+       publisher = "Kelvin";
+       version = "1.26.1";
+       sha256 = "sha256-WO9vYELNvwmuNeI05sUBE969KAiKYtrJ1fRfdZx3OYU=";
+     }
     ];
     userSettings = {
       "editor.minimap.enabled" = false;
-      "editor.codeActionsOnSave"= {
+      "editor.codeActionsOnSave" = {
         # "source.organizeImports"= "explicit";
       };
-      "nix.enableLanguageServer" = true;
+      # "nix.enableLanguageServer" = true;
       # "nix.serverPath" = "nil";
       # "nix.formatterPath" = "nixpkgs-fmt";
       # "nix.serverSettings" = {
@@ -88,6 +97,13 @@
       #     "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
       #   };
       # };
+      "sshfs.configs" = [
+        {
+          "name" = "homeserver";
+          "host" = "192.168.1.120";
+          "root" = "~";
+        }
+      ];
     };
   };
 
