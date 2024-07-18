@@ -25,15 +25,14 @@
     #android-sdk
     #android-tools
     caprine-bin
-    # firebase-tools
     firefox
+    floorp
     google-chrome
     nodejs_20
     nodePackages.eas-cli
     palenight-theme
     python3
     spotify
-    #steam
     supabase-cli
     watchman
   ]) ++ (with pkgs.gnomeExtensions; [
@@ -47,7 +46,6 @@
   
   programs.bash.enable = true;
 
-  # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
     userName  = "rhysmc190";
@@ -100,7 +98,7 @@
       "sshfs.configs" = [
         {
           "name" = "homeserver";
-          "host" = "192.168.1.120";
+          "host" = "192.168.1.108";
           "root" = "~";
         }
       ];

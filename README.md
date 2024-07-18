@@ -10,6 +10,7 @@
 ### System Update
 
 `nix flake update`
+
 `sudo nixos-rebuild switch`
 
 ### Troubleshooting
@@ -19,3 +20,7 @@ try `git add .`
 
 `error: insufficient permission for adding an object to repository database .git/objects`:
 try `sudo chmod -R 777 .git`
+
+### Rollback
+
+when rolling back to a certain build number from boot, run `sudo /run/booted-system/bin/switch-to-configuration boot` to make the current config the default one to boot into
