@@ -117,6 +117,7 @@
     };
   };
 
+# run `dconf watch /` to watch for changes made in the ui, then add the changes here
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
