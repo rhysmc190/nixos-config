@@ -15,7 +15,7 @@
   		declarativeHome = import ./modules/declarativeHome.nix;
   	};
   
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.fwk-nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = with self.nixosModules; [
       	#({ config = { nix.registry.nixpkgs.flake = nixpkgs; }; })
