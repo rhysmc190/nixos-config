@@ -107,9 +107,18 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 60d";
+    };
+    optimise.automatic = true;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
