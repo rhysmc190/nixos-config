@@ -139,6 +139,8 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  programs.direnv.enable = true;
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.

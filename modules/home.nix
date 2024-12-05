@@ -44,7 +44,10 @@
     vitals
   ]);
   
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    bashrcExtra = "eval \"$(direnv hook bash)\"";
+  };
 
   programs.git = {
     enable = true;
@@ -70,8 +73,12 @@
     mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions; [
       bierner.markdown-mermaid
+      denoland.vscode-deno
       dracula-theme.theme-dracula
+      golang.go
+      grapecity.gc-excelviewer
       jnoortheen.nix-ide
+      mkhl.direnv
       ms-python.python
       tamasfe.even-better-toml
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
