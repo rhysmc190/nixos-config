@@ -78,8 +78,10 @@
       golang.go
       grapecity.gc-excelviewer
       jnoortheen.nix-ide
+      mechatroner.rainbow-csv
       mkhl.direnv
       ms-python.python
+      ms-vscode.powershell
       tamasfe.even-better-toml
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
      {
@@ -94,6 +96,7 @@
       "editor.codeActionsOnSave" = {
         # "source.organizeImports"= "explicit";
       };
+      "go.vetOnSave" = "off";
       # "nix.enableLanguageServer" = true;
       # "nix.serverPath" = "nil";
       # "nix.formatterPath" = "nixpkgs-fmt";
