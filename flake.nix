@@ -1,5 +1,5 @@
 {
-  description = "A simple NixOS flake";
+  description = "NixOS setup for fwk 13 laptop w/ gnome desktop and home-manager";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -14,12 +14,13 @@
   		gnome = import ./modules/gnome.nix;
   		declarativeHome = import ./modules/declarativeHome.nix;
   	};
-  
+
     nixosConfigurations.fwk-nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = with self.nixosModules; [
       	#({ config = { nix.registry.nixpkgs.flake = nixpkgs; }; })
         ./configuration.nix
+        ./virt.nix
         home-manager.nixosModules.home-manager
         gnome
         declarativeHome

@@ -100,7 +100,7 @@
     extraGroups = [ "docker" "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
-    #  thunderbird
+      quickemu
     ];
   };
 
