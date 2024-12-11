@@ -2,6 +2,7 @@
 {
   users.users.rhys.extraGroups = [ "libvirtd" ];
   environment.systemPackages = with pkgs; [
+    adwaita-icon-theme
     spice
     spice-gtk
     spice-protocol
@@ -9,7 +10,6 @@
     virt-viewer
     win-virtio
     win-spice
-    gnome.adwaita-icon-theme
   ];
   virtualisation = {
     libvirtd = {
@@ -22,5 +22,5 @@
     };
     spiceUSBRedirection.enable = true;
   };
-  services.spice-vdagent.enable = true;
+  services.spice-vdagentd.enable = true;
 }
