@@ -28,6 +28,7 @@
     firefox
     floorp
     google-chrome
+    libreoffice
     nodejs_20
     nodePackages.eas-cli
     palenight-theme
@@ -75,6 +76,7 @@
       bierner.markdown-mermaid
       denoland.vscode-deno
       dracula-theme.theme-dracula
+      github.vscode-github-actions
       golang.go
       grapecity.gc-excelviewer
       jnoortheen.nix-ide
@@ -130,6 +132,11 @@
       gcloud.disabled = true;
       line_break.disabled = true;
     };
+  };
+
+  gtk = {
+    enable = true;
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
   };
 
 # run `dconf watch /` to watch for changes made in the ui, then add the changes here
