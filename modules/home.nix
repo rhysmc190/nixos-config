@@ -98,9 +98,6 @@
       "editor.codeActionsOnSave" = {
         # "source.organizeImports"= "explicit";
       };
-      "files.exclude" = {
-        "**/.git" = false;
-      };
       # "nix.enableLanguageServer" = true;
       # "nix.serverPath" = "nil";
       # "nix.formatterPath" = "nixpkgs-fmt";
