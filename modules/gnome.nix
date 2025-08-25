@@ -2,13 +2,13 @@
   config = {
     services.xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
       desktopManager = {
-        gnome.enable = true;
         xterm.enable = false;
       };
       excludePackages = [ pkgs.xterm ];
     };
+    services.desktopManager.gnome.enable = true;
+    services.displayManager.gdm.enable = true;
     environment.gnome.excludePackages = (with pkgs; [
       atomix # puzzle game
       cheese # webcam tool
