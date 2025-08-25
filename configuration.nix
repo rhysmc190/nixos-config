@@ -59,14 +59,15 @@
   # services.xserver.libinput.enable = true;
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
     videoDrivers = [ "amdgpu" ];
     xkb = {
       layout = "au";
       variant = "";
     };
   };
+
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -76,7 +77,7 @@
 
   # Enable sound with pipewire.
   # sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

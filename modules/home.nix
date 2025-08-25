@@ -69,55 +69,57 @@
 	# https://github.com/thomashoneyman/.dotfiles/blob/69d61ae8650f12f123d375534714c78a3095fb0e/modules/programs/default.nix
   programs.vscode = {
     enable = true;
-    enableExtensionUpdateCheck = false;
-    enableUpdateCheck = false;
     mutableExtensionsDir = false;
-    extensions = with pkgs.vscode-extensions; [
-      bierner.markdown-mermaid
-      denoland.vscode-deno
-      dracula-theme.theme-dracula
-      github.vscode-github-actions
-      golang.go
-      grapecity.gc-excelviewer
-      jnoortheen.nix-ide
-      mechatroner.rainbow-csv
-      mkhl.direnv
-      ms-python.python
-      ms-vscode.powershell
-      tamasfe.even-better-toml
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-     {
-       name = "vscode-sshfs";
-       publisher = "Kelvin";
-       version = "1.26.1";
-       sha256 = "sha256-WO9vYELNvwmuNeI05sUBE969KAiKYtrJ1fRfdZx3OYU=";
-     }
-    ];
-    userSettings = {
-      "editor.minimap.enabled" = false;
-      "editor.codeActionsOnSave" = {
-        # "source.organizeImports"= "explicit";
-      };
-      # "nix.enableLanguageServer" = true;
-      # "nix.serverPath" = "nil";
-      # "nix.formatterPath" = "nixpkgs-fmt";
-      # "nix.serverSettings" = {
-      #   "nil" = {
-      #     "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
-      #   };
-      # };
-      "sshfs.configs" = [
-        {
-          "name" = "homeserver";
-          "host" = "192.168.1.108";
-          "root" = "~";
-        }
-        {
-          "name" = "testbench";
-          "host" = "192.168.1.107"; ###should be.102
-          "root" = "~";
-        }
+    profiles.default = {
+      enableExtensionUpdateCheck = false;
+      enableUpdateCheck = false;
+      extensions = with pkgs.vscode-extensions; [
+        bierner.markdown-mermaid
+        denoland.vscode-deno
+        dracula-theme.theme-dracula
+        github.vscode-github-actions
+        golang.go
+        grapecity.gc-excelviewer
+        jnoortheen.nix-ide
+        mechatroner.rainbow-csv
+        mkhl.direnv
+        ms-python.python
+        ms-vscode.powershell
+        tamasfe.even-better-toml
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "vscode-sshfs";
+        publisher = "Kelvin";
+        version = "1.26.1";
+        sha256 = "sha256-WO9vYELNvwmuNeI05sUBE969KAiKYtrJ1fRfdZx3OYU=";
+      }
       ];
+      userSettings = {
+        "editor.minimap.enabled" = false;
+        "editor.codeActionsOnSave" = {
+          # "source.organizeImports"= "explicit";
+        };
+        # "nix.enableLanguageServer" = true;
+        # "nix.serverPath" = "nil";
+        # "nix.formatterPath" = "nixpkgs-fmt";
+        # "nix.serverSettings" = {
+        #   "nil" = {
+        #     "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
+        #   };
+        # };
+        "sshfs.configs" = [
+          {
+            "name" = "homeserver";
+            "host" = "192.168.1.108";
+            "root" = "~";
+          }
+          {
+            "name" = "testbench";
+            "host" = "192.168.1.107"; ###should be.102
+            "root" = "~";
+          }
+        ];
+      };
     };
   };
 
