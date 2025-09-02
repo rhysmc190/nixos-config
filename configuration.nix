@@ -15,6 +15,7 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+      timeout = 0; # skips nixos generation menu. mash spacebar on startup to drop into the menu
     };
     kernelPackages = pkgs.linuxPackages_latest;
     initrd.kernelModules = [ "amdgpu" ];
