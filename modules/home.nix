@@ -40,6 +40,7 @@
     blur-my-shell
     dash-to-panel
     gsconnect
+    media-controls
     tray-icons-reloaded
     user-themes
     vitals
