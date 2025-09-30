@@ -166,6 +166,7 @@
         "blur-my-shell@aunetx"
         "dash-to-panel@jderose9.github.com"
         "gsconnect@andyholmes.github.io"
+        "mediacontrols@cliffniff.github.com"
         "trayIconsReloaded@selfmade.pl"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "Vitals@CoreCoding.com"
@@ -179,6 +180,9 @@
       intellihide-hide-from-windows = true;
       intellihide-behaviour = "FOCUSED_WINDOWS";
       intellihide-show-in-fullscreen = true;
+    };
+    "org/gnome/extensions/mediacontrols" = {
+      label-width = 0;
     };
     "org/gnome/mutter" = {
       # enables fractional scaling, but:
