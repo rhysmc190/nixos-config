@@ -21,11 +21,6 @@
   # '';
 
   services.mpris-proxy.enable = true;
-  services.ollama = {
-    enable = true;
-    # Optional: preload models, see https://ollama.com/library
-    loadModels = ["deepseek-r1:1.5b"];
-  };
 
   # Packages that should be installed to the user profile.
   home.packages = (with pkgs; [
