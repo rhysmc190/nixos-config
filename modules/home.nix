@@ -30,7 +30,7 @@
     firefox
     floorp-bin
     google-chrome
-    libreoffice-bin
+    libreoffice
     nodejs_20
     nodePackages.eas-cli
     palenight-theme
