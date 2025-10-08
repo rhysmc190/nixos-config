@@ -31,6 +31,7 @@
     floorp-bin
     google-chrome
     libreoffice
+    llama-cpp
     nodejs_20
     nodePackages.eas-cli
     palenight-theme
@@ -95,6 +96,12 @@
         publisher = "Kelvin";
         version = "1.26.1";
         sha256 = "sha256-WO9vYELNvwmuNeI05sUBE969KAiKYtrJ1fRfdZx3OYU=";
+      }
+      {
+        name = "llama-vscode";
+        publisher = "ggml-org";
+        version = "0.0.32";
+        sha256 = "sha256-tw7DyLXVcnIbuBDpRbvJb7G+2u1X2plZWbN4+gaWMcA=";
       }
       ];
       userSettings = {
