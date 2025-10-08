@@ -21,6 +21,11 @@
   # '';
 
   services.mpris-proxy.enable = true;
+  services.ollama = {
+    enable = true;
+    # Optional: preload models, see https://ollama.com/library
+    loadModels = ["deepseek-r1:1.5b"];
+  };
 
   # Packages that should be installed to the user profile.
   home.packages = (with pkgs; [
@@ -31,7 +36,6 @@
     floorp-bin
     google-chrome
     libreoffice
-    llama-cpp
     nodejs_20
     nodePackages.eas-cli
     palenight-theme
@@ -96,12 +100,6 @@
         publisher = "Kelvin";
         version = "1.26.1";
         sha256 = "sha256-WO9vYELNvwmuNeI05sUBE969KAiKYtrJ1fRfdZx3OYU=";
-      }
-      {
-        name = "llama-vscode";
-        publisher = "ggml-org";
-        version = "0.0.32";
-        sha256 = "sha256-tw7DyLXVcnIbuBDpRbvJb7G+2u1X2plZWbN4+gaWMcA=";
       }
       ];
       userSettings = {
@@ -197,9 +195,24 @@
       # enables fractional scaling, but:
       # have to manually set scaling factor in settings gui, no way to set it here yet
       experimental-features = [ "scale-monitor-framebuffer" ];
+      dynamic-workspaces = false;
+      workspaces-only-on-primary = false;
     };
     "org/gtk/settings/file-chooser" = {
       clock-format = "12h";
+    };
+    "org/gnome/desktop/wm/keybindings" = {
+      move-to-workspace-1 = ["<Shift><Super>1"];
+      move-to-workspace-2 = ["<Shift><Super>2"];
+      move-to-workspace-3 = ["<Shift><Super>3"];
+      move-to-workspace-4 = ["<Shift><Super>4"];
+      switch-to-workspace-1 = ["<Alt><Super>1"];
+      switch-to-workspace-2 = ["<Alt><Super>2"];
+      switch-to-workspace-3 = ["<Alt><Super>3"];
+      switch-to-workspace-4 = ["<Alt><Super>4"];
+    };
+    "org/gnome/desktop/wm/preferences" = {
+      num-workspaces = 4;
     };
   };
 
