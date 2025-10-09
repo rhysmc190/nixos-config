@@ -149,10 +149,13 @@
   services.tailscale.enable = true;
   services.power-profiles-daemon.enable = false;
   services.tlp.enable = true;
-    services.ollama = {
+  services.ollama = {
     enable = true;
     # Optional: preload models, see https://ollama.com/library
-    loadModels = ["deepseek-r1:1.5b"];
+    loadModels = [
+        "deepseek-r1:1.5b"
+        "deepseek-r1:8b"
+      ];
   };
 
   # Enable the OpenSSH daemon.
