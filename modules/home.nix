@@ -88,6 +88,7 @@
         jnoortheen.nix-ide
         mechatroner.rainbow-csv
         mkhl.direnv
+        ms-azuretools.vscode-containers
         ms-python.python
         ms-vscode.powershell
         tamasfe.even-better-toml
