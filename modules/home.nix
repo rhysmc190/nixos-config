@@ -80,6 +80,8 @@
         bierner.markdown-mermaid
         denoland.vscode-deno
         dracula-theme.theme-dracula
+        github.copilot
+        github.copilot-chat
         github.vscode-github-actions
         golang.go
         grapecity.gc-excelviewer
