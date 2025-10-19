@@ -55,16 +55,18 @@
 
   programs.git = {
     enable = true;
-    userName  = "rhysmc190";
-    userEmail = "rhysmc190@gmail.com";
-    aliases = {
-      ac = "!git add -A && git commit -m";
-    };
-    extraConfig = {
+    settings = {
+      user = {
+        name = "rhysmc190";
+        email = "rhysmc190@gmail.com";
+      };
+      alias = {
+        ac = "!git add -A && git commit -m";
+      };
       credential.helper = "${
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
-			push = { autoSetupRemote = true; };
+      push = { autoSetupRemote = true; };
     };
   };
   

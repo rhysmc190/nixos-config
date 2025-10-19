@@ -118,6 +118,10 @@
     optimise.automatic = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
+
+  systemd.settings.Manager = {
+    DefaultTimeoutStopSec = "30s";
+  };
   
   # List packages installed in system profile. To search, run:
   # $ nix search wget
