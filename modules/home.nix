@@ -101,6 +101,12 @@
         version = "1.26.1";
         sha256 = "sha256-WO9vYELNvwmuNeI05sUBE969KAiKYtrJ1fRfdZx3OYU=";
       }
+      {
+        name = "json-script-tag";
+        publisher = "sissel";
+        version = "0.3.2";
+        sha256 = "sha256-vlZRlhluEBXehXe9pK7iZjzi8a3LZdWBfkOli36C6h4=";
+      }
       ];
       userSettings = {
         "editor.minimap.enabled" = false;
