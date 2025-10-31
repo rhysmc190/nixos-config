@@ -6,9 +6,9 @@
     spice
     spice-gtk
     spice-protocol
+    virtio-win
     virt-manager
     virt-viewer
-    win-virtio
     win-spice
   ];
   virtualisation = {
