@@ -107,6 +107,12 @@
         version = "0.3.2";
         sha256 = "sha256-vlZRlhluEBXehXe9pK7iZjzi8a3LZdWBfkOli36C6h4=";
       }
+      {
+        name = "go-template";
+        publisher = "romantomjak";
+        version = "0.0.2";
+        sha256 = "sha256-mvVimz+rzftSQM09/7L7SCJtJWp/+DR0zaDWSWormAM=";
+      }
       ];
       userSettings = {
         "editor.minimap.enabled" = false;
