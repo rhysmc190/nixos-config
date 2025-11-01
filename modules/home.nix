@@ -80,6 +80,7 @@
       enableUpdateCheck = false;
       extensions = with pkgs.vscode-extensions; [
         bierner.markdown-mermaid
+        bradlc.vscode-tailwindcss
         denoland.vscode-deno
         dracula-theme.theme-dracula
         github.copilot
