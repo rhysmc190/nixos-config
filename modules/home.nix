@@ -34,6 +34,7 @@
     nodejs_20
     nodePackages.eas-cli
     palenight-theme
+    pass
     python3
     spotify
     supabase-cli
@@ -68,6 +69,15 @@
         }/bin/git-credential-libsecret";
       push = { autoSetupRemote = true; };
     };
+  };
+
+  programs.gpg = {
+    enable = true;
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
   };
   
   # https://github.com/K1aymore/Nixos-Config/blob/master/packages/coding.nix
