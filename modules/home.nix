@@ -28,7 +28,6 @@
     #android-tools
     caprine-bin
     firefox
-    floorp-bin
     google-chrome
     libreoffice
     nodejs_20
