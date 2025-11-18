@@ -39,6 +39,7 @@
     spotify
     supabase-cli
     watchman
+    zenBrowserTwilight
   ]) ++ (with pkgs.gnomeExtensions; [
     blur-my-shell
     dash-to-panel
