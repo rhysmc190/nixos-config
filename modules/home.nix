@@ -90,6 +90,7 @@
       enableExtensionUpdateCheck = false;
       enableUpdateCheck = false;
       extensions = with pkgs.vscode-extensions; [
+        anthropic.claude-code
         bierner.markdown-mermaid
         bradlc.vscode-tailwindcss
         denoland.vscode-deno
