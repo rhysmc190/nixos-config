@@ -27,6 +27,7 @@
     #android-sdk
     #android-tools
     caprine-bin
+    claude-code
     firefox
     google-chrome
     libreoffice
