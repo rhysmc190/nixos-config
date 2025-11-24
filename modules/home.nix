@@ -78,7 +78,9 @@
 
   services.gpg-agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry-gnome3;
+    pinentry = {
+      package = pkgs.pinentry-gnome3;
+    };
   };
   
   # https://github.com/K1aymore/Nixos-Config/blob/master/packages/coding.nix
