@@ -29,7 +29,7 @@
         {
           nixpkgs.overlays = [
             (final: prev: {
-              zenBrowserTwilight = inputs.zen-browser.packages.${final.system}.twilight;
+              zenBrowserTwilight = inputs.zen-browser.packages.${final.stdenv.hostPlatform.system}.twilight;
             })
           ];
         }
