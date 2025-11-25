@@ -41,6 +41,7 @@
     watchman
     zenBrowserTwilight
   ]) ++ (with pkgs.gnomeExtensions; [
+    bluetooth-battery-meter
     blur-my-shell
     dash-to-panel
     gsconnect
@@ -197,6 +198,7 @@
       disable-user-extensions = false;
 
       enabled-extensions = [
+        "Bluetooth-Battery-Meter@maniacx.github.com"
         "blur-my-shell@aunetx"
         "dash-to-panel@jderose9.github.com"
         "gsconnect@andyholmes.github.io"
@@ -217,6 +219,10 @@
     };
     "org/gnome/extensions/mediacontrols" = {
       label-width = 0;
+    };
+    "/org/gnome/shell/extensions/Bluetooth-Battery-Meter" = {
+      on-hover-delay = 500;
+      level-indicator-type = 1;
     };
     "org/gnome/mutter" = {
       # enables fractional scaling, but:
