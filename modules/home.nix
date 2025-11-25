@@ -220,7 +220,7 @@
     "org/gnome/extensions/mediacontrols" = {
       label-width = 0;
     };
-    "/org/gnome/shell/extensions/Bluetooth-Battery-Meter" = {
+    "org/gnome/shell/extensions/Bluetooth-Battery-Meter" = {
       on-hover-delay = 500;
       level-indicator-type = 1;
     };
