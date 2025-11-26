@@ -33,9 +33,11 @@
   networking = {
     hostName = "fwk-nixos";
     networkmanager.enable = true;
-    firewall = {
+    firewall = rec {
       enable = true;
       allowedTCPPorts = [ 80 443 8081 9099 ]; # 80, 443 standard - 8081 open for expo go - 9099 firebase:emulators auth
+      allowedTCPPortRanges = [ { from = 1714; to = 1764; } ]; #kdeconnect/gsconnect
+      allowedUDPPortRanges = allowedTCPPortRanges;
     };
   };
 
@@ -147,6 +149,11 @@
   };
 
   programs.direnv.enable = true;
+
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
 
   # List services that you want to enable:
 

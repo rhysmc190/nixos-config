@@ -73,6 +73,11 @@
     };
   };
 
+  programs.gnome-shell = {
+    enable = true;
+    extensions = [{ package = pkgs.gnomeExtensions.gsconnect; }];
+  };
+
   programs.gpg = {
     enable = true;
   };
