@@ -98,7 +98,6 @@
       enableExtensionUpdateCheck = false;
       enableUpdateCheck = false;
       extensions = with pkgs.vscode-extensions; [
-        # anthropic.claude-code
         bierner.markdown-mermaid
         bradlc.vscode-tailwindcss
         denoland.vscode-deno
@@ -133,6 +132,12 @@
         publisher = "romantomjak";
         version = "0.0.2";
         sha256 = "sha256-mvVimz+rzftSQM09/7L7SCJtJWp/+DR0zaDWSWormAM=";
+      }
+      {
+        name = "claude-code";
+        publisher = "anthropic";
+        version = "2.0.58";
+        sha256 = "sha256-j5yeFtbaW0UVrchKOcqBO60ay9PuPDS4jQzz+GN+56U=";
       }
       ];
       userSettings = {
