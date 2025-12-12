@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  # Custom wrapper for ccusage (Claude Code usage tracker)
+  # Uses pnpm dlx to run ccusage - downloads are cached in ~/.pnpm-store
+  ccusage = pkgs.writeShellScriptBin "ccusage" ''
+    exec ${pkgs.nodePackages.pnpm}/bin/pnpm dlx ccusage "$@"
+  '';
+in
 {
   # TODO please change the username & home directory to your own
   home.username = "rhys";
@@ -23,7 +30,9 @@
   services.mpris-proxy.enable = true;
 
   # Packages that should be installed to the user profile.
-  home.packages = (with pkgs; [
+  home.packages = [
+    ccusage  # Custom ccusage package defined above
+  ] ++ (with pkgs; [
     #android-sdk
     #android-tools
     caprine-bin
