@@ -66,6 +66,11 @@ in
     bashrcExtra = "eval \"$(direnv hook bash)\"";
   };
 
+  programs.tmux = {
+    enable = true;
+    mouse = true;
+  };
+
   programs.git = {
     enable = true;
     settings = {

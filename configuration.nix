@@ -133,7 +133,6 @@
     htop
     jq
     obsidian
-    tmux
     tree
   ];
 
