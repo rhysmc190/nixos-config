@@ -36,6 +36,7 @@ in
   ] ++ (with pkgs; [
     #android-sdk
     #android-tools
+    bat
     caprine-bin
     claude-code
     firefox
@@ -199,6 +200,18 @@ in
   gtk = {
     enable = true;
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+  };
+
+  programs.ghostty = {
+    enable = true;
+    package = pkgs.ghostty;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    settings = {
+      theme = "TokyoNight Storm";
+      background-opacity = "0.95";
+      background-blur = "true";
+    };
   };
 
 # run `dconf watch /` to watch for changes made in the ui, then add the changes here
