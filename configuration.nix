@@ -170,7 +170,7 @@
   };
 
   # Prevent auto-suspend when idle
-  services.logind.lidSwitch = "suspend";  # still suspend on lid close
+  services.logind.settings.Login.HandleLidSwitch = "suspend";  # still suspend on lid close
 
   # Completely disable auto-suspend system-wide (prevents GNOME from overriding logind settings)
   # Lid close will still trigger suspend, but idle/timeout suspension is disabled
