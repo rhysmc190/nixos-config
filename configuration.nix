@@ -161,7 +161,23 @@
 
   services.tailscale.enable = true;
   services.power-profiles-daemon.enable = false;
-  services.tlp.enable = true;
+  services.tlp = {
+    enable = true;
+    settings = {
+      # Prevent auto-suspend on AC power
+      DISK_IDLE_SECS_ON_AC = 0;
+    };
+  };
+
+  # Prevent auto-suspend when idle
+  services.logind.lidSwitch = "suspend";  # still suspend on lid close
+
+  # Completely disable auto-suspend system-wide (prevents GNOME from overriding logind settings)
+  # Lid close will still trigger suspend, but idle/timeout suspension is disabled
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
   services.ollama = {
     enable = true;
     # Optional: preload models, see https://ollama.com/library
