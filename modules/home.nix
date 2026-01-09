@@ -49,6 +49,7 @@ in
     python3
     spotify
     supabase-cli
+    variety
     watchman
     zenBrowserTwilight
   ]) ++ (with pkgs.gnomeExtensions; [
