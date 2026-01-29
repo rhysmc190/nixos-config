@@ -66,6 +66,9 @@ in
   programs.bash = {
     enable = true;
     bashrcExtra = "eval \"$(direnv hook bash)\"";
+    shellAliases = {
+      claude = "claude --dangerously-skip-permissions";
+    };
   };
 
   programs.tmux = {
