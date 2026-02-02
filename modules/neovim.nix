@@ -1,7 +1,16 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.nixvim = {
     enable = true;
+
+    filetype.extension.gohtml = "gotmpl";
+
+    extraFiles."after/queries/gotmpl/injections.scm".text = ''
+      ; extends
+      ((text) @injection.content
+        (#set! injection.language "html")
+        (#set! injection.combined))
+    '';
 
     globals = {
       mapleader = " ";
@@ -69,7 +78,14 @@
       };
       treesitter = {
         enable = true;
+        settings.highlight.enable = true;
         settings.indent.enable = true;
+        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+          # Include all default grammars plus gotmpl for .gohtml files
+          bash c css diff dockerfile go gomod gosum gotmpl
+          html javascript json lua make markdown markdown_inline
+          nix python query regex rust toml tsx typescript vim vimdoc yaml
+        ];
       };
       indent-blankline.enable = true;
       toggleterm = {
