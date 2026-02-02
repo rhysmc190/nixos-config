@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
   # Custom wrapper for ccusage (Claude Code usage tracker)

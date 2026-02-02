@@ -11,6 +11,10 @@
     url = "github:0xc000022070/zen-browser-flake";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
@@ -21,6 +25,7 @@
 
     nixosConfigurations.fwk-nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
       modules = with self.nixosModules; [
       	#({ config = { nix.registry.nixpkgs.flake = nixpkgs; }; })
         ./configuration.nix
