@@ -113,9 +113,6 @@ in
 	# https://github.com/thomashoneyman/.dotfiles/blob/69d61ae8650f12f123d375534714c78a3095fb0e/modules/programs/default.nix
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode.override {
-      commandLineArgs = "--enable-transparent-visuals";
-    };
     mutableExtensionsDir = false;
     profiles.default = {
       enableExtensionUpdateCheck = false;
@@ -165,20 +162,6 @@ in
       ];
       userSettings = {
         "workbench.colorTheme" = "Tokyo Night Storm";
-        "window.titleBarStyle" = "custom";
-        "workbench.colorCustomizations" = {
-          "[Tokyo Night Storm]" = {
-            "editor.background" = "#24283bF2";
-            "sideBar.background" = "#1f2335F2";
-            "activityBar.background" = "#1f2335F2";
-            "panel.background" = "#1f2335F2";
-            "tab.activeBackground" = "#24283bF2";
-            "tab.inactiveBackground" = "#1f2335F2";
-            "editorGroupHeader.tabsBackground" = "#1f2335F2";
-            "statusBar.background" = "#1f2335F2";
-            "titleBar.activeBackground" = "#1f2335F2";
-          };
-        };
         "editor.minimap.enabled" = false;
         "editor.codeActionsOnSave" = {
           # "source.organizeImports"= "explicit";
