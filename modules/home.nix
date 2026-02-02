@@ -121,7 +121,7 @@ in
         bierner.markdown-mermaid
         bradlc.vscode-tailwindcss
         denoland.vscode-deno
-        dracula-theme.theme-dracula
+        enkia.tokyo-night
         github.copilot
         github.copilot-chat
         github.vscode-github-actions
@@ -161,6 +161,7 @@ in
       }
       ];
       userSettings = {
+        "workbench.colorTheme" = "Tokyo Night Storm";
         "editor.minimap.enabled" = false;
         "editor.codeActionsOnSave" = {
           # "source.organizeImports"= "explicit";
