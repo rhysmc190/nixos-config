@@ -41,7 +41,23 @@
       signcolumn = "yes";
       autowrite = true;
       confirm = true;
+      autoread = true;
     };
+
+    autoCmd = [
+      # Reload files changed outside of nvim
+      {
+        event = [ "FocusGained" "BufEnter" "CursorHold" "CursorHoldI" ];
+        pattern = [ "*" ];
+        command = "if mode() != 'c' | checktime | endif";
+      }
+      # Notify when file changes
+      {
+        event = [ "FileChangedShellPost" ];
+        pattern = [ "*" ];
+        command = "echohl WarningMsg | echo 'File changed on disk. Buffer reloaded.' | echohl None";
+      }
+    ];
 
     colorschemes.tokyonight = {
       enable = true;
