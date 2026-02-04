@@ -128,12 +128,22 @@ git_status_indicator=""
 if git rev-parse --git-dir >/dev/null 2>&1; then
   git_branch=$(git branch --show-current 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
 
-  # Check if repo is clean or dirty (only if feature enabled)
+  # Build combined status indicator
   if [ "$SHOW_GIT_STATUS" = true ]; then
+    # Check clean/dirty
     if [ -z "$(git status --porcelain 2>/dev/null)" ]; then
-      git_status_indicator="✓"  # clean
+      git_status_indicator="✓"
+      git_status_color="$(git_clean_color)"
     else
-      git_status_indicator="●"  # dirty (uncommitted changes)
+      git_status_indicator="●"
+      git_status_color="$(git_dirty_color)"
+    fi
+
+    # Check ahead/behind remote
+    if git rev-parse --abbrev-ref '@{upstream}' >/dev/null 2>&1; then
+      read -r behind ahead <<< "$(git rev-list --count --left-right '@{upstream}...HEAD' 2>/dev/null)"
+      [ "$ahead" -gt 0 ] 2>/dev/null && git_status_indicator="${git_status_indicator}↑"
+      [ "$behind" -gt 0 ] 2>/dev/null && git_status_indicator="${git_status_indicator}↓"
     fi
   fi
 fi
@@ -160,11 +170,7 @@ printf '\n📁 %s%s%s' "$(dir_color)" "$current_dir" "$(rst)"
 if [ -n "$git_branch" ]; then
   printf '  🌿 %s%s' "$(git_color)" "$git_branch"
   if [ "$SHOW_GIT_STATUS" = true ] && [ -n "$git_status_indicator" ]; then
-    if [ "$git_status_indicator" = "✓" ]; then
-      printf ' %s%s' "$(git_clean_color)" "$git_status_indicator"
-    else
-      printf ' %s%s' "$(git_dirty_color)" "$git_status_indicator"
-    fi
+    printf ' %s%s' "$git_status_color" "$git_status_indicator"
   fi
   printf '%s' "$(rst)"
 fi
