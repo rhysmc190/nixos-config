@@ -38,7 +38,4 @@
     yelp
   ];
 
-  environment.systemPackages = with pkgs; [
-    gnome-tweaks
-  ];
 }

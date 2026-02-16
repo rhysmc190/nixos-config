@@ -1,11 +1,12 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    bat
+    adwaita-icon-theme
     caprine-bin
     claude-code
     eza
     fd
     firefox
+    gnome-tweaks
     google-chrome
     htop
     jq
@@ -16,11 +17,17 @@
     pass
     python3
     ripgrep
+    spice
+    spice-gtk
+    spice-protocol
     spotify
     supabase-cli
-    tree
     variety
+    virt-manager
+    virt-viewer
+    virtio-win
     watchman
+    win-spice
     wl-clipboard
     zenBrowserTwilight
   ];

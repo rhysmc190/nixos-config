@@ -1,16 +1,37 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    history = {
+      size = 50000;
+      save = 50000;
+      ignoreDups = true;
+      expireDuplicatesFirst = true;
+    };
     shellAliases = {
       claude = "claude --dangerously-skip-permissions";
+      find = "fd";
       ls = "eza";
       ll = "eza -l";
       la = "eza -la";
       tree = "eza --tree";
     };
+  };
+
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "TwoDark";
+      style = "numbers,changes";
+    };
+    extraPackages = with pkgs; [ bat-extras.batman ];
+  };
+
+  home.sessionVariables = {
+    MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+    MANROFFOPT = "-c";
   };
 
   programs.direnv = {
@@ -21,6 +42,9 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+    defaultCommand = "fd --type f --hidden --follow --exclude .git";
+    fileWidgetCommand = "fd --type f --hidden --follow --exclude .git";
+    changeDirWidgetCommand = "fd --type d --hidden --follow --exclude .git";
   };
 
   programs.zoxide = {

@@ -14,15 +14,4 @@
   };
 
   services.spice-vdagentd.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    adwaita-icon-theme
-    spice
-    spice-gtk
-    spice-protocol
-    virtio-win
-    virt-manager
-    virt-viewer
-    win-spice
-  ];
 }

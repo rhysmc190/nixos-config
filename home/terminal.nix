@@ -2,7 +2,6 @@
   programs.ghostty = {
     enable = true;
     package = pkgs.ghostty;
-    enableBashIntegration = true;
     enableZshIntegration = true;
     settings = {
       font-family = "JetBrainsMono Nerd Font";
