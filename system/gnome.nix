@@ -15,15 +15,22 @@
     cheese
     epiphany
     geary
+    gnome-calendar
     gnome-characters
+    gnome-clocks
+    gnome-connections
     gnome-contacts
     gnome-initial-setup
+    gnome-logs
+    gnome-maps
     gnome-music
     gnome-photos
     gnome-tour
+    gnome-weather
     hitori
     iagno
     simple-scan
+    snapshot
     tali
     yelp
   ];

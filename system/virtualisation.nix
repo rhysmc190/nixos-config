@@ -6,7 +6,10 @@
   ];
 
   virtualisation = {
-    docker.enable = true;
+    docker = {
+      enable = true;
+      enableOnBoot = false; # start on first use via socket activation
+    };
     libvirtd = {
       enable = true;
       qemu = {
@@ -17,5 +20,4 @@
     spiceUSBRedirection.enable = true;
   };
 
-  services.spice-vdagentd.enable = true;
 }
