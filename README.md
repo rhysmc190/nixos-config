@@ -5,13 +5,11 @@
 1. `sudo mv /etc/nixos /etc/nixos.bak`
 1. `sudo ln -s ~/nixos-config /etc/nixos` (may also need to change file group/owner)
 1. update hardware config from /etc/nixos.bak to ~/nixos-config if necessary
-1. `sudo nixos-rebuild switch`
+1. `just rebuild`
 
 ### System Update
 
-`nix flake update`
-
-`sudo nixos-rebuild switch`
+`just update && just rebuild`
 
 ### Running programs without installing
 

@@ -1,5 +1,3 @@
-hostname := "fwk-nixos"
-
 # rebuild and switch to new configuration
 rebuild:
     nh os switch .

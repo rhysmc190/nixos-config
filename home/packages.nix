@@ -27,8 +27,6 @@
     python3
     supabase-cli
     watchman
-    # also consider: httpie/curlie (friendlier HTTP clients for API testing)
-    # also consider: devenv/devbox (per-project services on top of direnv)
 
     # cli tools
     btop
