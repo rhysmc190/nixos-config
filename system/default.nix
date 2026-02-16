@@ -13,6 +13,7 @@
     ./ollama.nix
     ./steam.nix
     ./nix.nix
+    ./fonts.nix
   ];
 
   programs.zsh.enable = true;

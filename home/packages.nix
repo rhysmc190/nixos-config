@@ -3,6 +3,8 @@
     bat
     caprine-bin
     claude-code
+    eza
+    fd
     firefox
     google-chrome
     htop
@@ -13,11 +15,13 @@
     obsidian
     pass
     python3
+    ripgrep
     spotify
     supabase-cli
     tree
     variety
     watchman
+    wl-clipboard
     zenBrowserTwilight
   ];
 }

@@ -41,12 +41,6 @@
           version = "0.0.2";
           sha256 = "sha256-mvVimz+rzftSQM09/7L7SCJtJWp/+DR0zaDWSWormAM=";
         }
-        {
-          name = "claude-code";
-          publisher = "anthropic";
-          version = "2.0.58";
-          sha256 = "sha256-Ah3/N1nUgZQZn572zUPI4cn8r3x08x3Zz3Au1W/2Y5U=";
-        }
       ];
       userSettings = {
         "workbench.colorTheme" = "Tokyo Night Storm";
