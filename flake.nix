@@ -15,6 +15,7 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs =
@@ -52,6 +53,7 @@
         inherit system;
         specialArgs = { inherit inputs settings; };
         modules = [
+          inputs.nixos-hardware.nixosModules.framework-13-7040-amd
           ./hardware-configuration.nix
           ./system
           home-manager.nixosModules.home-manager

@@ -1,13 +1,8 @@
 { ... }:
 {
-  services.power-profiles-daemon.enable = false;
-
-  services.tlp = {
-    enable = true;
-    settings = {
-      DISK_IDLE_SECS_ON_AC = 0;
-    };
-  };
+  # PPD is recommended over TLP for AMD 7040 — it integrates with AMD P-State
+  # natively and works with GNOME's power profile quick settings
+  services.power-profiles-daemon.enable = true;
 
   # Still suspend on lid close
   services.logind.settings.Login.HandleLidSwitch = "suspend";

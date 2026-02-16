@@ -3,6 +3,7 @@
   home.packages =
     with pkgs.gnomeExtensions;
     [
+      battery-health-charging
       bluetooth-battery-meter
       blur-my-shell
       dash-to-panel
@@ -42,6 +43,7 @@
       ];
       disable-user-extensions = false;
       enabled-extensions = [
+        "Battery-Health-Charging@maniacx.github.com"
         "Bluetooth-Battery-Meter@maniacx.github.com"
         "blur-my-shell@aunetx"
         "dash-to-panel@jderose9.github.com"

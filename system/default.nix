@@ -2,6 +2,7 @@
 {
   imports = [
     ./boot.nix
+    ./framework.nix
     ./networking.nix
     ./locale.nix
     ./gnome.nix
@@ -9,7 +10,6 @@
     ./bluetooth.nix
     ./power.nix
     ./printing.nix
-    ./fingerprint.nix
     ./virtualisation.nix
     ./ollama.nix
     ./steam.nix
