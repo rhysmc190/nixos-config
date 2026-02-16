@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   services.xserver = {
-    enable = true;
     videoDrivers = [ "amdgpu" ];
     xkb = {
       layout = "au";

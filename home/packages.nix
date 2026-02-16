@@ -37,7 +37,6 @@
     eza
     fd
     jq
-    nix-output-monitor
     pass
     procs
     ripgrep

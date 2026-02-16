@@ -66,6 +66,16 @@
     options = [ "--cmd cd" ];
   };
 
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    flags = [ "--disable-up-arrow" ];
+    settings = {
+      style = "compact";
+      inline_height = 20;
+    };
+  };
+
   programs.starship = {
     enable = true;
     settings = {
