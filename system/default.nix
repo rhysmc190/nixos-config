@@ -16,6 +16,7 @@
     ./nix.nix
     ./fonts.nix
     ./maintenance.nix
+    ./sudo.nix
   ];
 
   programs.zsh.enable = true;
