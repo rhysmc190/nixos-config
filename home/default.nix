@@ -8,7 +8,7 @@
       extraSpecialArgs = { inherit inputs settings; };
       sharedModules = [
         inputs.nixvim.homeModules.nixvim
-        inputs.nix-index-database.hmModules.nix-index
+        inputs.nix-index-database.homeModules.nix-index
       ];
       users.${settings.username} = {
         imports = [
