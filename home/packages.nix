@@ -29,6 +29,7 @@
     watchman
 
     # cli tools
+    comma
     btop
     duf
     dust
