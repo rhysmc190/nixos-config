@@ -60,7 +60,7 @@
         "Bluetooth-Battery-Meter@maniacx.github.com"
         "blur-my-shell@aunetx"
         "dash-to-panel@jderose9.github.com"
-        "gsconnect@andyholmes.github.io"
+        "gsconnect@andyholmes.github.io" # installed via programs.kdeconnect in system/gnome.nix
         "mediacontrols@cliffniff.github.com"
         "trayIconsReloaded@selfmade.pl"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
@@ -84,7 +84,6 @@
       level-indicator-type = 1;
     };
     "org/gnome/mutter" = {
-      experimental-features = [ "scale-monitor-framebuffer" ];
       dynamic-workspaces = false;
       workspaces-only-on-primary = false;
     };

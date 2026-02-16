@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
   # PPD is recommended over TLP for AMD 7040 — it integrates with AMD P-State
   # natively and works with GNOME's power profile quick settings

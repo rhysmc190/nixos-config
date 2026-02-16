@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  # Requires nixos-hardware framework-13-7040-amd module (loaded in flake.nix)
+
   # Thunderbolt device management
   services.hardware.bolt.enable = true;
 

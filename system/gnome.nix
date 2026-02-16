@@ -1,15 +1,5 @@
 { pkgs, ... }:
 {
-  services.xserver = {
-    videoDrivers = [ "amdgpu" ];
-    xkb = {
-      layout = "au";
-      variant = "";
-    };
-    desktopManager.xterm.enable = false;
-    excludePackages = [ pkgs.xterm ];
-  };
-
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
 

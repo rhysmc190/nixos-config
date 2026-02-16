@@ -64,7 +64,7 @@
           ./home
           {
             nixpkgs.overlays = [
-              (final: prev: {
+              (final: _prev: {
                 zenBrowserTwilight = inputs.zen-browser.packages.${final.stdenv.hostPlatform.system}.twilight;
               })
             ];
