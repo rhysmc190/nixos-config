@@ -1,4 +1,5 @@
-{ settings, pkgs, ... }: {
+{ settings, pkgs, ... }:
+{
   imports = [
     ./boot.nix
     ./networking.nix
@@ -14,6 +15,7 @@
     ./steam.nix
     ./nix.nix
     ./fonts.nix
+    ./maintenance.nix
   ];
 
   programs.zsh.enable = true;
@@ -22,7 +24,10 @@
     isNormalUser = true;
     description = settings.username;
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   systemd.settings.Manager = {

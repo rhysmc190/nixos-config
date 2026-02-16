@@ -1,16 +1,20 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs.gnomeExtensions; [
-    bluetooth-battery-meter
-    blur-my-shell
-    dash-to-panel
-    gsconnect
-    media-controls
-    tray-icons-reloaded
-    user-themes
-    vitals
-  ] ++ [
-    pkgs.palenight-theme
-  ];
+{ pkgs, ... }:
+{
+  home.packages =
+    with pkgs.gnomeExtensions;
+    [
+      bluetooth-battery-meter
+      blur-my-shell
+      dash-to-panel
+      gsconnect
+      media-controls
+      tray-icons-reloaded
+      user-themes
+      vitals
+    ]
+    ++ [
+      pkgs.palenight-theme
+    ];
 
   gtk = {
     enable = true;

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   nixpkgs.config.allowUnfree = true;
 
   nix = {
@@ -8,6 +9,9 @@
       options = "--delete-older-than 14d";
     };
     optimise.automatic = true;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 }

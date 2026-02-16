@@ -1,9 +1,16 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    plugins = [
+      {
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab + "/share/fzf-tab";
+      }
+    ];
     history = {
       size = 50000;
       save = 50000;
@@ -11,11 +18,15 @@
       expireDuplicatesFirst = true;
     };
     shellAliases = {
+      cat = "bat";
       claude = "claude --dangerously-skip-permissions";
+      df = "duf";
+      du = "dust";
       find = "fd";
-      ls = "eza";
-      ll = "eza -l";
+      htop = "btop";
       la = "eza -la";
+      ll = "eza -l";
+      ls = "eza";
       tree = "eza --tree";
     };
   };
@@ -24,6 +35,7 @@
     enable = true;
     config = {
       theme = "TwoDark";
+      pager = "never";
       style = "numbers,changes";
     };
     extraPackages = with pkgs; [ bat-extras.batman ];

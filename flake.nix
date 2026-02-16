@@ -17,41 +17,51 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-  let
-    system = "x86_64-linux";
-    settings = {
-      username = "rhys";
-      hostname = "fwk-nixos";
-    };
-    pkgs = nixpkgs.legacyPackages.${system};
-  in
-  {
-    formatter.${system} = pkgs.nixfmt;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      settings = {
+        username = "rhys";
+        hostname = "fwk-nixos";
+      };
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      formatter.${system} = pkgs.nixfmt;
 
-    devShells.${system}.default = pkgs.mkShell {
-      packages = with pkgs; [
-        nixfmt
-        nil
-      ];
-    };
+      devShells.${system}.default = pkgs.mkShell {
+        packages = with pkgs; [
+          nixfmt
+          nil
+        ];
+      };
 
-    nixosConfigurations.${settings.hostname} = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = { inherit inputs settings; };
-      modules = [
-        ./hardware-configuration.nix
-        ./system
-        home-manager.nixosModules.home-manager
-        ./home
-        {
-          nixpkgs.overlays = [
-            (final: prev: {
-              zenBrowserTwilight = inputs.zen-browser.packages.${final.stdenv.hostPlatform.system}.twilight;
-            })
-          ];
-        }
-      ];
+      checks.${system} = {
+        system = self.nixosConfigurations.${settings.hostname}.config.system.build.toplevel;
+      };
+
+      nixosConfigurations.${settings.hostname} = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs settings; };
+        modules = [
+          ./hardware-configuration.nix
+          ./system
+          home-manager.nixosModules.home-manager
+          ./home
+          {
+            nixpkgs.overlays = [
+              (final: prev: {
+                zenBrowserTwilight = inputs.zen-browser.packages.${final.stdenv.hostPlatform.system}.twilight;
+              })
+            ];
+          }
+        ];
+      };
     };
-  };
 }

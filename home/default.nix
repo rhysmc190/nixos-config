@@ -1,4 +1,5 @@
-{ inputs, settings, ... }: {
+{ inputs, settings, ... }:
+{
   config = {
     home-manager = {
       backupFileExtension = "backup";
@@ -19,6 +20,7 @@
           ./gnome.nix
           ./neovim.nix
           ./gpg.nix
+          ./virtualisation.nix
           ./claude.nix
         ];
 

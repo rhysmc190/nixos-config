@@ -1,5 +1,9 @@
-{ settings, pkgs, ... }: {
-  users.users.${settings.username}.extraGroups = [ "docker" "libvirtd" ];
+{ settings, pkgs, ... }:
+{
+  users.users.${settings.username}.extraGroups = [
+    "docker"
+    "libvirtd"
+  ];
 
   virtualisation = {
     docker.enable = true;
