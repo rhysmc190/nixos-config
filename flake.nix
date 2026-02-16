@@ -39,6 +39,8 @@
         packages = with pkgs; [
           nixfmt
           nil
+          statix
+          deadnix
         ];
       };
 

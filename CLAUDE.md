@@ -4,10 +4,12 @@ NixOS configuration for Framework 13 laptop with GNOME desktop.
 
 ## Commands
 
-- Rebuild: `sudo nixos-rebuild switch --flake .#fwk-nixos`
-- Update flake inputs: `nix flake update`
-- Format: `nix fmt`
-- Dev shell (formatter + LSP): `nix develop`
+- Rebuild: `just rebuild`
+- Update flake inputs: `just update`
+- Format: `just fmt`
+- Dev shell (formatter + LSP + linters): `just dev`
+- Firmware updates: `just firmware`
+- List all recipes: `just --list`
 
 ## Structure
 
