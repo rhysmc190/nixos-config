@@ -2,7 +2,7 @@ hostname := "fwk-nixos"
 
 # rebuild and switch to new configuration
 rebuild:
-    sudo nom-rebuild switch --flake .#{{hostname}}
+    sudo nixos-rebuild switch --flake .#{{hostname}} |& nom
 
 # update all flake inputs
 update:
