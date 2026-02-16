@@ -16,6 +16,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -38,7 +42,7 @@
 
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
-          nixfmt
+          nixfmt-tree
           nil
           statix
           deadnix

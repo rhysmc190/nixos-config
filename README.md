@@ -13,6 +13,15 @@
 
 `sudo nixos-rebuild switch`
 
+### Running programs without installing
+
+Use `comma` to run any program from nixpkgs on-the-fly without adding it to your config:
+
+```
+, cowsay hello
+, nmap --help
+```
+
 ### Troubleshooting
 
 `error: ... ***-source/*.nix: file or directory does not exist`:

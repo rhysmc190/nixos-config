@@ -7,7 +7,6 @@
       bluetooth-battery-meter
       blur-my-shell
       dash-to-panel
-      gsconnect
       media-controls
       tray-icons-reloaded
       user-themes
@@ -35,6 +34,20 @@
     };
     "org/gnome/settings-daemon/plugins/color" = {
       night-light-enabled = true;
+    };
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
+      sleep-inactive-battery-type = "nothing";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      name = "Terminal";
+      command = "ghostty";
+      binding = "<Super>Return";
     };
     "org/gnome/shell" = {
       favorite-apps = [

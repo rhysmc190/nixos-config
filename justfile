@@ -2,7 +2,7 @@ hostname := "fwk-nixos"
 
 # rebuild and switch to new configuration
 rebuild:
-    sudo nixos-rebuild switch --flake .#{{hostname}} |& nom
+    nh os switch .
 
 # update all flake inputs
 update:
@@ -18,4 +18,4 @@ dev:
 
 # check and apply firmware updates
 firmware:
-    fwupdmgr refresh && fwupdmgr get-updates && fwupdmgr update
+    fwupdmgr refresh; fwupdmgr get-updates; fwupdmgr update

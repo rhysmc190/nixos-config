@@ -21,6 +21,7 @@
     # development
     claude-code
     just
+    nh
     nodejs_20
     nodePackages.eas-cli
     python3
@@ -38,6 +39,7 @@
     jq
     nix-output-monitor
     pass
+    procs
     ripgrep
     tldr
     tokei

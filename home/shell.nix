@@ -22,8 +22,8 @@
       claude = "claude --dangerously-skip-permissions";
       df = "duf";
       du = "dust";
-      find = "fd";
       htop = "btop";
+      ps = "procs";
       la = "eza -la";
       ll = "eza -l";
       ls = "eza";

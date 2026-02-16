@@ -8,6 +8,7 @@
       extraSpecialArgs = { inherit inputs settings; };
       sharedModules = [
         inputs.nixvim.homeModules.nixvim
+        inputs.nix-index-database.hmModules.nix-index
       ];
       users.${settings.username} = {
         imports = [
@@ -30,6 +31,7 @@
           stateVersion = "23.11";
         };
 
+        xdg.enable = true;
         programs.home-manager.enable = true;
       };
     };
