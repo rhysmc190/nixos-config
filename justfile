@@ -1,5 +1,6 @@
 # rebuild and switch to new configuration
 rebuild:
+    sudo -v
     nh os switch .
 
 # update all flake inputs
