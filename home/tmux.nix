@@ -14,9 +14,15 @@
     historyLimit = 50000;
     terminal = "tmux-256color";
     extraConfig = ''
+      set -g renumber-windows on
       set -ag terminal-overrides ",ghostty:RGB"
+      bind -n M-Left select-pane -L
+      bind -n M-Right select-pane -R
+      bind -n M-Up select-pane -U
+      bind -n M-Down select-pane -D
     '';
     plugins = with pkgs.tmuxPlugins; [
+      yank
       {
         plugin = resurrect;
         extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
