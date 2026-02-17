@@ -1,5 +1,4 @@
-_:
-{
+_: {
   nixpkgs.config.allowUnfree = true;
   programs.command-not-found.enable = false;
 

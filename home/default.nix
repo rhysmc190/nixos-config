@@ -26,7 +26,7 @@
         ];
 
         home = {
-          username = settings.username;
+          inherit (settings) username;
           homeDirectory = "/home/${settings.username}";
           stateVersion = "23.11";
         };
