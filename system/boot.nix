@@ -7,6 +7,7 @@
       timeout = 0;
     };
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "usbcore.autosuspend=-1" ];
     initrd.kernelModules = [ "amdgpu" ];
   };
 }
