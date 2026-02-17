@@ -1,5 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
+  home.activation.reloadTmux = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if command -v tmux &>/dev/null && tmux list-sessions &>/dev/null 2>&1; then
+      tmux source-file ~/.config/tmux/tmux.conf 2>/dev/null || true
+    fi
+  '';
+
   programs.tmux = {
     enable = true;
     mouse = true;
