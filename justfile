@@ -3,9 +3,11 @@ rebuild:
     sudo -v
     nh os switch .
 
-# update all flake inputs
+# update all flake inputs and rebuild
 update:
+    sudo -v
     nix flake update
+    nh os switch .
 
 # format nix files
 fmt:
