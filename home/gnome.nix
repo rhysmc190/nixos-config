@@ -86,6 +86,7 @@
     "org/gnome/mutter" = {
       dynamic-workspaces = false;
       workspaces-only-on-primary = false;
+      experimental-features = [ "scale-monitor-framebuffer" ];
     };
     "org/gtk/settings/file-chooser" = {
       clock-format = "12h";
