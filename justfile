@@ -8,6 +8,8 @@ update:
     sudo -v
     nix flake update
     nh os switch .
+    git ac "flake update"
+    git push
 
 # format nix files
 fmt:
