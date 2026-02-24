@@ -7,6 +7,7 @@ rebuild:
 update:
     sudo -v
     nix flake update
+    if git diff --quiet flake.lock; then echo "No flake input changes."; exit 0; fi
     nh os switch .
     git ac "flake update"
     git push
