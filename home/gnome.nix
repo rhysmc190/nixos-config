@@ -24,6 +24,11 @@
   services.mpris-proxy.enable = true;
 
   dconf.settings = {
+    # Debounce keyboard chatter (ignore same key pressed twice within N ms)
+    "org/gnome/desktop/a11y/keyboard" = {
+      bouncekeys-enable = true;
+      bouncekeys-delay = 30;
+    };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       show-battery-percentage = true;
