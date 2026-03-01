@@ -16,6 +16,7 @@
     caprine-bin
     libreoffice-fresh
     obsidian
+    xournalpp
     spotify
 
     # development
