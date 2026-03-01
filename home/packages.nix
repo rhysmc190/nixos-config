@@ -14,7 +14,7 @@
 
     # apps
     caprine-bin
-    libreoffice
+    libreoffice-fresh
     obsidian
     spotify
 
