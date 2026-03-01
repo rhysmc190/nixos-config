@@ -5,6 +5,8 @@ rebuild:
 
 # update all flake inputs and rebuild
 update:
+    #!/usr/bin/env bash
+    set -euo pipefail
     sudo -v
     nix flake update
     if git diff --quiet flake.lock; then echo "No flake input changes."; exit 0; fi
