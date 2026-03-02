@@ -16,6 +16,8 @@
     extraConfig = ''
       set -g renumber-windows on
       set -ag terminal-overrides ",ghostty:RGB"
+      set -s extended-keys on
+      set -as terminal-features 'ghostty:extkeys'
       bind -n M-Left select-pane -L
       bind -n M-Right select-pane -R
       bind -n M-Up select-pane -U
