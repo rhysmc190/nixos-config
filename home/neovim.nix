@@ -135,6 +135,7 @@
         settings.open_mapping = "[[<C-\\>]]";
       };
       persistence.enable = true;
+      nvim-autopairs.enable = true;
       web-devicons.enable = true;
       lsp = {
         enable = true;
