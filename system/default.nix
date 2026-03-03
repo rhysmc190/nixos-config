@@ -1,4 +1,4 @@
-{ settings, pkgs, ... }:
+{ settings, pkgs, lib, ... }:
 {
   imports = [
     ./boot.nix
@@ -11,7 +11,6 @@
     ./power.nix
     ./printing.nix
     ./virtualisation.nix
-    ./ollama.nix
     ./steam.nix
     ./nix.nix
     ./fonts.nix
@@ -21,6 +20,8 @@
 
   programs.zsh.enable = true;
 
+  programs.ydotool.enable = true;
+
   users.users.${settings.username} = {
     isNormalUser = true;
     description = settings.username;
@@ -28,7 +29,17 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "ydotool"
     ];
+  };
+
+  # Disable services that aren't needed and slow down boot
+  systemd.services = {
+    ModemManager.enable = false; # no cellular modem
+    NetworkManager-wait-online.enable = false; # not needed on desktop
+    wpa_supplicant.enable = false; # NetworkManager handles WiFi directly
+    libvirtd.wantedBy = lib.mkForce [ ]; # socket-activate instead of starting at boot
+    libvirt-guests.wantedBy = lib.mkForce [ ];
   };
 
   systemd.settings.Manager = {

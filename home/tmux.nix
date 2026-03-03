@@ -32,22 +32,28 @@ in
     terminal = "tmux-256color";
     extraConfig = ''
       set -g renumber-windows on
-      set -ag terminal-overrides ",xterm-ghostty:RGB"
-      set -s extended-keys always
-      set -as terminal-features 'xterm-ghostty:extkeys'
-      set -s extended-keys-format csi-u
       bind -n M-Left select-pane -L
       bind -n M-Right select-pane -R
       bind -n M-Up select-pane -U
       bind -n M-Down select-pane -D
     '';
     plugins = with pkgs.tmuxPlugins; [
-      yank
+      {
+        plugin = yank;
+        # Terminal capability settings must load before continuum's auto-restore,
+        # otherwise resurrected panes start without extended-keys (breaks Shift+Enter).
+        extraConfig = ''
+          set -ag terminal-overrides ",xterm-ghostty:RGB"
+          set -s extended-keys always
+          set -as terminal-features 'xterm-ghostty:extkeys'
+          set -s extended-keys-format csi-u
+        '';
+      }
       tmux-thumbs
       {
         plugin = resurrect;
         extraConfig = ''
-          set -g @resurrect-processes '"claude->TERM_PROGRAM=ghostty claude --dangerously-skip-permissions --continue" nvim'
+          set -g @resurrect-processes '"claude->claude --dangerously-skip-permissions --continue" nvim'
         '';
       }
       {

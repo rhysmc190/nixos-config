@@ -12,6 +12,7 @@
     };
     libvirtd = {
       enable = true;
+      onBoot = "ignore";
       qemu = {
         swtpm.enable = true;
         vhostUserPackages = with pkgs; [ virtiofsd ];

@@ -24,6 +24,15 @@
 
   services.mpris-proxy.enable = true;
 
+  # Mask unused Evolution backend services (~0.8s on login)
+  systemd.user.services = {
+    "evolution-addressbook-factory".Unit.ConditionPathExists = "/nonexistent";
+    "evolution-calendar-factory".Unit.ConditionPathExists = "/nonexistent";
+    "evolution-source-registry".Unit.ConditionPathExists = "/nonexistent";
+    "evolution-alarm-notify".Unit.ConditionPathExists = "/nonexistent";
+    "evolution-user-prompter".Unit.ConditionPathExists = "/nonexistent";
+  };
+
   dconf.settings = {
     # Debounce keyboard chatter (ignore same key pressed twice within N ms)
     "org/gnome/desktop/a11y/keyboard" = {
