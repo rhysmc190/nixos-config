@@ -37,7 +37,7 @@
   systemd.services = {
     ModemManager.enable = false; # no cellular modem
     NetworkManager-wait-online.enable = false; # not needed on desktop
-    wpa_supplicant.enable = false; # NetworkManager handles WiFi directly
+    wpa_supplicant.enable = true; # NetworkManager handles WiFi directly
     libvirtd.wantedBy = lib.mkForce [ ]; # socket-activate instead of starting at boot
     libvirt-guests.wantedBy = lib.mkForce [ ];
   };
