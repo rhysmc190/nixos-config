@@ -134,6 +134,7 @@
         enable = true;
         settings.open_mapping = "[[<C-\\>]]";
       };
+      persistence.enable = true;
       web-devicons.enable = true;
       lsp = {
         enable = true;
