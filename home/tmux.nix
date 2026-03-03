@@ -26,6 +26,7 @@
     '';
     plugins = with pkgs.tmuxPlugins; [
       yank
+      tmux-thumbs
       {
         plugin = resurrect;
         extraConfig = ''
