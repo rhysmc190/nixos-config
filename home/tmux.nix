@@ -29,7 +29,6 @@
       {
         plugin = resurrect;
         extraConfig = ''
-          set -g @resurrect-capture-pane-contents 'on'
           set -g @resurrect-processes '"claude->TERM_PROGRAM=ghostty claude --dangerously-skip-permissions --continue" nvim'
         '';
       }
