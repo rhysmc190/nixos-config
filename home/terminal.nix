@@ -9,6 +9,7 @@
       theme = "TokyoNight Storm";
       background-opacity = "0.9";
       background-blur = "true";
+      window-decoration = "false";
       keybind = [
         "ctrl+enter=toggle_window_decorations"
         "ctrl+shift+enter=toggle_fullscreen"

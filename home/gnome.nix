@@ -78,6 +78,7 @@
       name = "palenight";
     };
     "org/gnome/shell/extensions/dash-to-panel" = {
+      hide-overview-on-startup = true;
       intellihide = true;
       intellihide-hide-from-windows = true;
       intellihide-behaviour = "FOCUSED_WINDOWS";
