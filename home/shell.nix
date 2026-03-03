@@ -11,6 +11,11 @@
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
     enableCompletion = true;
+    initExtra = ''
+      if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
+        tmux new-session -A
+      fi
+    '';
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     plugins = [
