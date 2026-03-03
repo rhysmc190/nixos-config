@@ -6,7 +6,7 @@ let
 
   agentStateCmd =
     state:
-    "[ -n \"$TMUX_AGENT_INDICATOR_DIR\" ] && \"$TMUX_AGENT_INDICATOR_DIR/scripts/agent-state.sh\" --agent claude --state ${state}";
+    "eval \"$(tmux show-environment -g TMUX_AGENT_INDICATOR_DIR 2>/dev/null)\" && \"$TMUX_AGENT_INDICATOR_DIR/scripts/agent-state.sh\" --agent claude --state ${state}";
 
   hooksFile = pkgs.writeText "claude-hooks.json" (
     builtins.toJSON {

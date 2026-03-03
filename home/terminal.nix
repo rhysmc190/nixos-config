@@ -1,6 +1,17 @@
 { pkgs, ... }:
 let
   ghosttyStartScript = pkgs.writeShellScript "ghostty-tmux-start" ''
+    # Wait for GNOME Shell to be ready (extensions loaded, overview hidden)
+    # before launching, so dash-to-panel has hidden the Activities overlay.
+    for i in $(seq 1 20); do
+      if ${pkgs.glib}/bin/gdbus call --session \
+           -d org.gnome.Shell -o /org/gnome/Shell \
+           -m org.gnome.Shell.Eval "Main.overview.visible" 2>/dev/null | grep -q "false"; then
+        break
+      fi
+      sleep 0.05
+    done
+
     # Move cursor to external monitor so Ghostty opens there (GNOME opens
     # windows on the monitor with the cursor). Coordinates target the center
     # of the Dell DP-5 at logical position x=1503, 1920x1080.
