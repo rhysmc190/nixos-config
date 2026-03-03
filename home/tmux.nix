@@ -15,9 +15,10 @@
     terminal = "tmux-256color";
     extraConfig = ''
       set -g renumber-windows on
-      set -ag terminal-overrides ",ghostty:RGB"
-      set -s extended-keys on
-      set -as terminal-features 'ghostty:extkeys'
+      set -ag terminal-overrides ",xterm-ghostty:RGB"
+      set -s extended-keys always
+      set -as terminal-features 'xterm-ghostty:extkeys'
+      set -s extended-keys-format csi-u
       bind -n M-Left select-pane -L
       bind -n M-Right select-pane -R
       bind -n M-Up select-pane -U

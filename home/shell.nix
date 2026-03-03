@@ -20,7 +20,7 @@
     };
     shellAliases = {
       cat = "bat";
-      claude = "claude --dangerously-skip-permissions";
+      claude = "TERM_PROGRAM=ghostty claude --dangerously-skip-permissions";
       df = "duf";
       du = "dust";
       htop = "btop";
