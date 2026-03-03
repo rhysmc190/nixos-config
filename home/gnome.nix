@@ -11,6 +11,7 @@
       tray-icons-reloaded
       user-themes
       vitals
+      maximized-by-default-actually-reborn
     ]
     ++ [
       pkgs.palenight-theme
@@ -70,6 +71,7 @@
         "trayIconsReloaded@selfmade.pl"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "Vitals@CoreCoding.com"
+        "gnome-shell-extension-maximized-by-default@stiggimy.github.com"
       ];
     };
     "org/gnome/shell/extensions/user-theme" = {

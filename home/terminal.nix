@@ -15,4 +15,12 @@
       ];
     };
   };
+
+  xdg.configFile."autostart/ghostty-tmux.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Ghostty Tmux
+    Exec=ghostty -e tmux new-session -A
+    X-GNOME-Autostart-enabled=true
+  '';
 }
