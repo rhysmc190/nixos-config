@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 # Custom Claude Code statusline
 
-MAX_DIR_LENGTH=30
+# Adapt to terminal width
+COLS=$(tput cols 2>/dev/null || echo 80)
+if [ "$COLS" -lt 50 ]; then
+  MAX_DIR_LENGTH=12
+  MAX_BRANCH_LENGTH=10
+elif [ "$COLS" -lt 80 ]; then
+  MAX_DIR_LENGTH=20
+  MAX_BRANCH_LENGTH=18
+else
+  MAX_DIR_LENGTH=30
+  MAX_BRANCH_LENGTH=30
+fi
 
 input=$(cat)
 
@@ -89,6 +100,7 @@ printf '%s  🕐 %s' "$(rst)" "$(date '+%I:%M %p')"
 
 printf '\n📁 %s%s%s' "$(dir_color)" "$current_dir" "$(rst)"
 if [ -n "$git_branch" ]; then
+  git_branch=$(truncate "$git_branch" "$MAX_BRANCH_LENGTH")
   printf '  🌿 %s%s %s%s%s' "$(git_color)" "$git_branch" "$git_status_color" "$git_status_indicator" "$(rst)"
 fi
 printf '\n'
