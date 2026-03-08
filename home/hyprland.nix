@@ -3,8 +3,23 @@ let
   ghosttyStartScript = pkgs.writeShellScript "ghostty-hyprland-start" ''
     export GPG_TTY=$(tty)
     gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
-    echo | gpg --sign >/dev/null 2>&1
     exec tmux new-session -A
+  '';
+  powerMenu = pkgs.writeShellScript "power-menu" ''
+    choice=$(printf "Lock\nLogout\nSuspend\nReboot\nShutdown" | rofi -dmenu -display-drun "" -theme ~/.config/rofi/tokyo-night.rasi -p "Power")
+    case "$choice" in
+      Lock) hyprlock ;;
+      Logout) hyprctl dispatch exit ;;
+      Suspend) systemctl suspend ;;
+      Reboot) systemctl reboot ;;
+      Shutdown) systemctl poweroff ;;
+    esac
+  '';
+  setWallpaperScript = pkgs.writeShellScript "set-wallpaper" ''
+    WP="$1"
+    hyprctl hyprpaper preload "$WP"
+    hyprctl hyprpaper wallpaper ",$WP"
+    hyprctl hyprpaper unload all
   '';
 in
 {
@@ -13,8 +28,8 @@ in
     settings = {
       # Monitors: laptop + external Dell (verify DP name with `hyprctl monitors all`)
       monitor = [
-        "eDP-1, 2256x1504@60, 0x0, 1.5"
-        "DP-5, 1920x1080@60, 1504x0, 1"
+        "eDP-1, 2256x1504@60, 0x0, 1.57"
+        "DP-6, 1920x1080@60, 1440x0, 1"
         ", preferred, auto, 1" # fallback for any other monitor
       ];
 
@@ -72,32 +87,34 @@ in
         };
       };
 
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_fingers = 3;
-      };
+      gesture = [
+        "3, horizontal, workspace,"
+      ];
 
       misc = {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
+        disable_splash_rendering = true;
       };
 
       exec-once = [
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store"
         "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store"
-        "variety"
+        "install -Dm755 ${setWallpaperScript} ~/.config/variety/scripts/set_wallpaper && variety"
         "ghostty -e ${ghosttyStartScript}"
       ];
 
       windowrule = [
-        "float, class:^(pavucontrol)$"
-        "float, class:^(blueman-manager)$"
-        "float, class:^(nm-connection-editor)$"
-        "float, title:^(Open File)$"
-        "float, title:^(Save File)$"
-        "float, title:^(Confirm)$"
-        "opacity 0.9 0.85, class:^(com.mitchellh.ghostty)$"
+        "float true, match:class ^(pavucontrol)$"
+        "float true, match:class ^(blueman-manager)$"
+        "float true, match:class ^(nm-connection-editor)$"
+        "float true, match:title ^(Open File)$"
+        "float true, match:title ^(Save File)$"
+        "float true, match:title ^(Confirm)$"
+        "opacity 0.9 0.85, match:class ^(com.mitchellh.ghostty)$"
+        "no_blur true, match:class ^(com.mitchellh.ghostty)$"
+        "monitor DP-6, match:class ^(com.mitchellh.ghostty)$"
       ];
 
       "$mod" = "SUPER";
@@ -113,7 +130,8 @@ in
         # Launch
         "$mod, Return, exec, ghostty"
         "$mod, E, exec, nautilus"
-        "$mod, R, exec, wofi --show drun"
+        "$mod, R, exec, rofi -show drun -display-drun \"\" -show-icons -theme ~/.config/rofi/tokyo-night.rasi"
+        "$mod, space, exec, rofi -show drun -display-drun \"\" -show-icons -theme ~/.config/rofi/tokyo-night.rasi"
 
         # Focus
         "$mod, left, movefocus, l"
@@ -160,10 +178,15 @@ in
         "$mod SHIFT, S, exec, ${pkgs.grim}/bin/grim - | ${pkgs.wl-clipboard}/bin/wl-copy"
 
         # Clipboard history
-        "$mod SHIFT, V, exec, ${pkgs.cliphist}/bin/cliphist list | wofi --dmenu | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
+        "$mod SHIFT, V, exec, ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu -theme ~/.config/rofi/tokyo-night.rasi | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
 
-        # Lock
+        # Notifications
+        "$mod, N, exec, swaync-client -t -sw"
+        "$mod SHIFT, N, exec, swaync-client -C"
+
+        # Lock & power
         "$mod, L, exec, hyprlock"
+        "$mod SHIFT, L, exec, ${powerMenu}"
 
         # Scroll through workspaces
         "$mod, mouse_down, workspace, e+1"
@@ -196,33 +219,75 @@ in
   };
 
   # Notifications
-  services.dunst = {
+  services.swaync = {
     enable = true;
     settings = {
-      global = {
-        width = 300;
-        height = 100;
-        offset = "10x10";
-        origin = "top-right";
-        transparency = 10;
-        frame_color = "#7aa2f7";
-        font = "JetBrainsMono Nerd Font 10";
-        corner_radius = 8;
-      };
-      urgency_low = {
-        background = "#1a1b26";
-        foreground = "#a9b1d6";
-      };
-      urgency_normal = {
-        background = "#1a1b26";
-        foreground = "#a9b1d6";
-      };
-      urgency_critical = {
-        background = "#1a1b26";
-        foreground = "#f7768e";
-        frame_color = "#f7768e";
-      };
+      positionX = "right";
+      positionY = "top";
+      control-center-width = 400;
+      notification-window-width = 300;
+      notification-icon-size = 48;
+      notification-body-image-height = 100;
+      notification-body-image-width = 200;
+      timeout = 5;
+      timeout-low = 3;
+      timeout-critical = 0;
+      fit-to-screen = true;
+      keyboard-shortcuts = true;
+      image-visibility = "when-available";
+      transition-time = 200;
+      hide-on-clear = true;
+      hide-on-action = true;
+      script-fail-notify = true;
     };
+    style = ''
+      * {
+        font-family: "JetBrainsMono Nerd Font";
+        font-size: 13px;
+      }
+      .notification-row {
+        outline: none;
+      }
+      .notification {
+        border-radius: 8px;
+        border: 2px solid #7aa2f7;
+        background: #1a1b26;
+        color: #a9b1d6;
+        margin: 4px;
+        padding: 8px;
+      }
+      .notification-content {
+        margin: 4px;
+      }
+      .close-button {
+        background: #292e42;
+        color: #a9b1d6;
+        border-radius: 50%;
+        margin: 4px;
+      }
+      .close-button:hover {
+        background: #f7768e;
+      }
+      .control-center {
+        background: #1a1b26;
+        border: 2px solid #7aa2f7;
+        border-radius: 8px;
+        color: #a9b1d6;
+      }
+      .control-center-list-placeholder {
+        color: #565f89;
+      }
+      .notification-group-headers {
+        color: #7aa2f7;
+      }
+      .widget-dnd > switch {
+        border-radius: 8px;
+        background: #292e42;
+      }
+      .widget-dnd > switch:checked {
+        background: #7aa2f7;
+      }
+    '';
   };
 
   # Night light
@@ -263,6 +328,23 @@ in
       ];
     };
   };
+
+  # Cursor
+  home.pointerCursor = {
+    name = "Simp1e-Tokyo-Night-Storm";
+    package = pkgs.simp1e-cursors;
+    size = 24;
+    gtk.enable = true;
+  };
+
+  # Wallpaper — hyprpaper sets wallpapers, variety triggers changes via script
+  services.hyprpaper = {
+    enable = true;
+    settings.splash = false;
+  };
+
+  xdg.configFile."rofi/tokyo-night.rasi".source = ../files/rofi-tokyo-night.rasi;
+
 
   # Lock screen
   programs.hyprlock = {

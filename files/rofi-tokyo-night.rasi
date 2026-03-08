@@ -1,0 +1,114 @@
+/**
+ * Tokyo Night theme for rofi
+ */
+
+* {
+    bg:           #1a1b26;
+    bg-alt:       #24283b;
+    fg:           #a9b1d6;
+    fg-dim:       #565f89;
+    accent:       #7aa2f7;
+    accent-alt:   #bb9af7;
+    urgent:       #f7768e;
+    green:        #9ece6a;
+
+    spacing: 0;
+    background-color: transparent;
+}
+
+window {
+    background-color: @bg;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 8px;
+    width: 600px;
+    padding: 0;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ inputbar, listview ];
+    spacing: 0;
+}
+
+inputbar {
+    background-color: @bg-alt;
+    padding: 12px 16px;
+    spacing: 8px;
+    children: [ prompt, entry ];
+    border: 0 0 1px 0;
+    border-color: @accent;
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @accent;
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+entry {
+    background-color: transparent;
+    text-color: @fg;
+    placeholder: "Search...";
+    placeholder-color: @fg-dim;
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+listview {
+    background-color: transparent;
+    lines: 8;
+    columns: 1;
+    fixed-height: true;
+    padding: 4px 0;
+    scrollbar: false;
+}
+
+element {
+    background-color: transparent;
+    padding: 8px 16px;
+    spacing: 12px;
+}
+
+element selected.normal {
+    background-color: @bg-alt;
+    border: 0 0 0 3px;
+    border-color: @accent;
+}
+
+element selected.urgent {
+    background-color: @bg-alt;
+    border: 0 0 0 3px;
+    border-color: @urgent;
+}
+
+element selected.active {
+    background-color: @bg-alt;
+    border: 0 0 0 3px;
+    border-color: @green;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 24px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: @fg;
+    font: "JetBrainsMono Nerd Font 11";
+    highlight: bold underline;
+}
+
+element-text selected {
+    text-color: @accent;
+}
+
+element-text urgent {
+    text-color: @urgent;
+}
+
+element-text active {
+    text-color: @green;
+}

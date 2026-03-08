@@ -1,7 +1,20 @@
-{ ... }:
+{ pkgs, ... }:
+let
+  powerMenu = pkgs.writeShellScript "power-menu" ''
+    choice=$(printf "Lock\nLogout\nSuspend\nReboot\nShutdown" | rofi -dmenu -theme ~/.config/rofi/tokyo-night.rasi -p "Power")
+    case "$choice" in
+      Lock) hyprlock ;;
+      Logout) hyprctl dispatch exit ;;
+      Suspend) systemctl suspend ;;
+      Reboot) systemctl reboot ;;
+      Shutdown) systemctl poweroff ;;
+    esac
+  '';
+in
 {
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     settings = {
       mainBar = {
         layer = "top";
@@ -21,6 +34,7 @@
           "network"
           "bluetooth"
           "battery"
+          "custom/power"
         ];
 
         "hyprland/workspaces" = {
@@ -39,12 +53,12 @@
         };
 
         cpu = {
-          format = " {usage}%";
+          format = "󰍛 {usage}%";
           interval = 5;
         };
 
         memory = {
-          format = " {percentage}%";
+          format = "󰑭 {percentage}%";
           interval = 5;
         };
 
@@ -55,41 +69,44 @@
 
         pulseaudio = {
           format = "{icon} {volume}%";
-          format-muted = " muted";
+          format-muted = "󰝟 muted";
           format-icons = {
             default = [
-              ""
-              ""
-              ""
+              "󰕿"
+              "󰖀"
+              "󰕾"
             ];
           };
           on-click = "pavucontrol";
         };
 
         network = {
-          format-wifi = " {signalStrength}%";
-          format-ethernet = " {ipaddr}";
-          format-disconnected = "⚠ disconnected";
-          tooltip-format = "{ifname}: {ipaddr}/{cidr}\n{essid}";
+          format-wifi = "{icon}";
+          format-icons = [ "󰤟" "󰤢" "󰤥" "󰤨" ];
+          format-ethernet = "󰈀 {ipaddr}";
+          format-disconnected = "󰤭";
+          tooltip-format-wifi = "{essid} ({signalStrength}%)\n{ifname}: {ipaddr}/{cidr}";
+          tooltip-format-ethernet = "{ifname}: {ipaddr}/{cidr}";
+          tooltip-format-disconnected = "Disconnected";
           on-click = "nm-connection-editor";
         };
 
         bluetooth = {
-          format = " {status}";
-          format-connected = " {device_alias}";
-          format-disabled = "";
+          format = "󰂯 {status}";
+          format-connected = "󰂱 {device_alias}";
+          format-disabled = "󰂲";
           on-click = "blueman-manager";
         };
 
         battery = {
           format = "{icon} {capacity}%";
-          format-charging = " {capacity}%";
+          format-charging = "󰂄 {capacity}%";
           format-icons = [
-            ""
-            ""
-            ""
-            ""
-            ""
+            "󰁺"
+            "󰁼"
+            "󰁾"
+            "󰂀"
+            "󰁹"
           ];
           states = {
             warning = 30;
@@ -99,6 +116,12 @@
 
         tray = {
           spacing = 8;
+        };
+
+        "custom/power" = {
+          format = "⏻";
+          tooltip = false;
+          on-click = "${powerMenu}";
         };
       };
     };
@@ -170,6 +193,10 @@
 
       #network.disconnected {
         color: #f7768e;
+      }
+
+      #custom-power {
+        padding: 0 12px 0 8px;
       }
 
       tooltip {

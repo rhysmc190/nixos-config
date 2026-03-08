@@ -17,7 +17,7 @@ let
     # of the Dell DP-5 at logical position x=1503, 1920x1080.
     ${pkgs.ydotool}/bin/ydotool mousemove --absolute -- 2463 540
 
-    exec ghostty -e bash -c 'export GPG_TTY=$(tty); gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1; echo | gpg --sign >/dev/null 2>&1; exec tmux new-session -A'
+    exec ghostty -e bash -c 'export GPG_TTY=$(tty); gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1; exec tmux new-session -A'
   '';
 in
 {

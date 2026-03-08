@@ -3,6 +3,9 @@
   services.desktopManager.gnome.enable = true;
   services.displayManager.gdm.enable = true;
 
+  # Forward login password to gpg-agent so GPG key is unlocked at login
+  security.pam.services.gdm-password.gnupg.enable = true;
+
   programs.dconf.enable = true;
 
   programs.kdeconnect = {

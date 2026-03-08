@@ -27,6 +27,14 @@ in
 
   services.displayManager.defaultSession = "hyprland";
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
+  };
+
   security.polkit.enable = true;
 
   # System-level key debounce via interception-tools (replaces GNOME bounce

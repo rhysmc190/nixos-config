@@ -8,7 +8,7 @@
     wl-clipboard
 
     # hyprland ecosystem
-    wofi
+    rofi
     grim
     slurp
     brightnessctl
@@ -18,7 +18,6 @@
     pavucontrol
     networkmanagerapplet
     polkit_gnome
-    swaybg
 
     # browsers
     firefox
