@@ -18,6 +18,7 @@
           ./tmux.nix
           ./terminal.nix
           ./vscode.nix
+          ./theme.nix
           ./gnome.nix
           ./hyprland.nix
           ./waybar.nix

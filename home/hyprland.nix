@@ -91,6 +91,12 @@ in
         "3, horizontal, workspace,"
       ];
 
+      env = [
+        "QT_QPA_PLATFORM,wayland;xcb"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        "GDK_BACKEND,wayland,x11,*"
+      ];
+
       misc = {
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;

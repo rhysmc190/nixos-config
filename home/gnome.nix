@@ -17,13 +17,6 @@
       pkgs.palenight-theme
     ];
 
-  gtk = {
-    enable = true;
-    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-  };
-
-  services.mpris-proxy.enable = true;
-
   # Mask unused Evolution backend services (~0.8s on login)
   systemd.user.services = {
     "evolution-addressbook-factory".Unit.ConditionPathExists = "/nonexistent";
@@ -34,11 +27,6 @@
   };
 
   dconf.settings = {
-    # Key debounce is now handled system-wide by interception-tools
-    # (system/hyprland.nix) so GNOME bounce keys are no longer needed.
-    "org/gnome/desktop/a11y/keyboard" = {
-      bouncekeys-enable = false;
-    };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       show-battery-percentage = true;
