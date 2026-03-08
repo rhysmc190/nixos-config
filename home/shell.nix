@@ -18,7 +18,7 @@
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
     enableCompletion = true;
-    initExtra = ''
+    initContent = ''
       if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
         tmux new-session -A
       fi
