@@ -4,7 +4,8 @@
   services.displayManager.gdm.enable = true;
 
   # Forward login password to gpg-agent so GPG key is unlocked at login
-  security.pam.services.gdm-password.gnupg.enable = true;
+  # gdm-password substacks to login, so gnupg must be enabled on login
+  security.pam.services.login.gnupg.enable = true;
 
   programs.dconf.enable = true;
 
