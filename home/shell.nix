@@ -1,12 +1,19 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   # Background the bat cache rebuild so it doesn't block activation (~345ms)
-  home.activation.batCache = lib.mkForce (lib.hm.dag.entryAfter [ "linkGeneration" ] ''
-    (
-      export XDG_CACHE_HOME=${config.xdg.cacheHome}
-      ${lib.getExe config.programs.bat.package} cache --build
-    ) &
-  '');
+  home.activation.batCache = lib.mkForce (
+    lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+      (
+        export XDG_CACHE_HOME=${config.xdg.cacheHome}
+        ${lib.getExe config.programs.bat.package} cache --build
+      ) &
+    ''
+  );
   programs.zsh = {
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";

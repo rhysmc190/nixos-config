@@ -19,6 +19,8 @@
           ./terminal.nix
           ./vscode.nix
           ./gnome.nix
+          ./hyprland.nix
+          ./waybar.nix
           ./neovim.nix
           ./gpg.nix
           ./virtualisation.nix

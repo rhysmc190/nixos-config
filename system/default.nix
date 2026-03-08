@@ -1,4 +1,9 @@
-{ settings, pkgs, lib, ... }:
+{
+  settings,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./boot.nix
@@ -6,6 +11,7 @@
     ./networking.nix
     ./locale.nix
     ./gnome.nix
+    ./hyprland.nix
     ./audio.nix
     ./bluetooth.nix
     ./power.nix

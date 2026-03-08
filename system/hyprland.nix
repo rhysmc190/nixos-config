@@ -1,0 +1,50 @@
+{ pkgs, lib, ... }:
+let
+  # Keyboard debounce plugin for interception-tools. Delays key-release events
+  # by a configurable window; if a re-press arrives during that window it's
+  # treated as chatter and the release is discarded. Works at the evdev level
+  # under any compositor. https://github.com/cpphusky/debouncer-udevmon
+  debouncer-udevmon = pkgs.rustPlatform.buildRustPackage {
+    pname = "debouncer-udevmon";
+    version = "0.2.3-unstable-2025-08-18";
+    src = pkgs.fetchFromGitHub {
+      owner = "cpphusky";
+      repo = "debouncer-udevmon";
+      rev = "753f660cde1ed7630d84c0d84e9b025a0c9d3be4";
+      hash = "sha256-gs/anqSW17KmaIL76KU3Vo4o7pcd3eAG+Wgc4RjxxCI=";
+    };
+    cargoHash = "sha256-eGP1XpurdY8j/piONvS5w5R3uiDoH2QcISIMB8v8Ya4=";
+    LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+    nativeBuildInputs = [
+      pkgs.rustPlatform.bindgenHook
+      pkgs.pkg-config
+    ];
+    buildInputs = [ pkgs.openssl ];
+  };
+in
+{
+  programs.hyprland.enable = true;
+
+  services.displayManager.defaultSession = "hyprland";
+
+  security.polkit.enable = true;
+
+  # System-level key debounce via interception-tools (replaces GNOME bounce
+  # keys, works under any compositor including Hyprland and GNOME).
+  services.interception-tools = {
+    enable = true;
+    plugins = [ debouncer-udevmon ];
+    udevmonConfig = ''
+      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${debouncer-udevmon}/bin/debouncer-udevmon | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+        DEVICE:
+          EVENTS:
+            EV_KEY: [[KEY_RESERVED, KEY_MAX]]
+    '';
+  };
+
+  # Debouncer config: 30ms delay, exclude modifier keys from debouncing
+  environment.etc."debouncer.toml".text = ''
+    debounce_time = 30
+    exceptions = [29, 42, 54, 56, 97, 100, 125]
+  '';
+}

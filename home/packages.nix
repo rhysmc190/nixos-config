@@ -7,6 +7,19 @@
     variety
     wl-clipboard
 
+    # hyprland ecosystem
+    wofi
+    grim
+    slurp
+    brightnessctl
+    playerctl
+    cliphist
+    blueman
+    pavucontrol
+    networkmanagerapplet
+    polkit_gnome
+    swaybg
+
     # browsers
     firefox
     google-chrome

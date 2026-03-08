@@ -34,10 +34,10 @@
   };
 
   dconf.settings = {
-    # Debounce keyboard chatter (ignore same key pressed twice within N ms)
+    # Key debounce is now handled system-wide by interception-tools
+    # (system/hyprland.nix) so GNOME bounce keys are no longer needed.
     "org/gnome/desktop/a11y/keyboard" = {
-      bouncekeys-enable = true;
-      bouncekeys-delay = 30;
+      bouncekeys-enable = false;
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
