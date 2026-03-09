@@ -31,13 +31,27 @@ in
 {
   programs.hyprland.enable = true;
 
-  # Login manager
-  services.greetd = {
+  # Login manager (regreet via greetd + cage)
+  programs.regreet = {
     enable = true;
-    settings.default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
-      user = "greeter";
+    theme = {
+      name = "Tokyonight-Dark";
+      package = pkgs.tokyonight-gtk-theme;
     };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    cursorTheme = {
+      name = "Simp1e-Tokyo-Night-Storm";
+      package = pkgs.simp1e-cursors;
+    };
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      size = 13;
+    };
+    settings.GTK.application_prefer_dark_theme = true;
   };
 
   # Forward login password to gpg-agent so GPG key is unlocked at login
