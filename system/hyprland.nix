@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   # Keyboard debounce plugin for interception-tools. Delays key-release events
   # by a configurable window; if a re-press arrives during that window it's
@@ -21,20 +21,6 @@ let
     ];
     buildInputs = [ pkgs.openssl ];
   };
-  sddm-tokyo-night = pkgs.stdenvNoCC.mkDerivation {
-    pname = "sddm-tokyo-night";
-    version = "2024-03-06";
-    src = pkgs.fetchFromGitHub {
-      owner = "siddrs";
-      repo = "tokyo-night-sddm";
-      rev = "320c8e74ade1e94f640708eee0b9a75a395697c6";
-      hash = "sha256-JRVVzyefqR2L3UrEK2iWyhUKfPMUNUnfRZmwdz05wL0=";
-    };
-    installPhase = ''
-      mkdir -p $out/share/sddm/themes/tokyo-night-sddm
-      cp -r $src/* $out/share/sddm/themes/tokyo-night-sddm/
-    '';
-  };
   # Stash the login password so Hyprland can unlock gnome-keyring.
   # Hyprland's exec-once reads this file to unlock the keyring daemon.
   stashGkPassword = pkgs.writeShellScript "stash-gk-password" ''
@@ -46,16 +32,11 @@ in
   programs.hyprland.enable = true;
 
   # Login manager
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    theme = "tokyo-night-sddm";
-    extraPackages = [ sddm-tokyo-night ];
-    package = pkgs.kdePackages.sddm;
-  };
+  services.displayManager.gdm.enable = true;
+  services.displayManager.defaultSession = "hyprland";
 
   # Forward login password to gpg-agent so GPG key is unlocked at login
-  security.pam.services.sddm.gnupg.enable = true;
+  security.pam.services.login.gnupg.enable = true;
 
   xdg.portal = {
     enable = true;
