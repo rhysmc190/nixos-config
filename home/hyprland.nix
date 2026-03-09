@@ -316,9 +316,9 @@ in
     };
   };
 
-  # Idle management
+  # Idle management (disabled — was auto-locking after timeout)
   services.hypridle = {
-    enable = true;
+    enable = false;
     settings = {
       general = {
         lock_cmd = "pidof hyprlock || hyprlock";

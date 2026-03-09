@@ -44,6 +44,7 @@ in
   };
 
   security.polkit.enable = true;
+  security.pam.services.hyprlock = {};
 
   # Stash the login password for gnome-keyring unlock (see stashGkPassword above)
   security.pam.services.login.rules.session.stash-gk-password = {
