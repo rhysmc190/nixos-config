@@ -29,6 +29,65 @@ let
     hyprctl hyprpaper wallpaper ",$WP"
     hyprctl hyprpaper unload all
   '';
+  systemMenu = pkgs.writeShellScript "system-menu" ''
+    wifi=$(nmcli -t -f active,ssid dev wifi 2>/dev/null | grep '^yes' | cut -d: -f2)
+    wifi="''${wifi:-Disconnected}"
+
+    bt=$(bluetoothctl info 2>/dev/null | grep "Name:" | cut -d' ' -f2-)
+    bt="''${bt:-No device}"
+
+    vol=$(${pkgs.wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | awk '{printf "%.0f%%", $2*100}')
+    vol="''${vol:-unknown}"
+
+    bri=$(${pkgs.brightnessctl}/bin/brightnessctl info 2>/dev/null | grep -oP '\d+%')
+    bri="''${bri:-unknown}"
+
+    vpn_status="Off"
+    if tailscale status 2>/dev/null | head -1 | grep -qv "stopped"; then
+      vpn_status="On"
+    fi
+
+    choice=$(printf "WiFi: $wifi\nBluetooth: $bt\nVolume: $vol\nBrightness: $bri\nVPN: $vpn_status\nLock\nPower" | rofi -dmenu -theme ~/.config/rofi/tokyo-night.rasi -p "System")
+
+    case "$choice" in
+      WiFi*) nm-connection-editor ;;
+      Bluetooth*) blueman-manager ;;
+      Volume*) pavucontrol ;;
+      Brightness*)
+        level=$(printf "100%%\n75%%\n50%%\n25%%\n10%%" | rofi -dmenu -theme ~/.config/rofi/tokyo-night.rasi -p "Brightness")
+        [ -n "$level" ] && ${pkgs.brightnessctl}/bin/brightnessctl set "$level"
+        ;;
+      VPN*)
+        if [ "$vpn_status" = "Off" ]; then
+          pkexec tailscale up
+        else
+          pkexec tailscale down
+        fi
+        ;;
+      Lock) hyprlock ;;
+      Power*) ${powerMenu} ;;
+    esac
+  '';
+  keybindViewer = pkgs.writeShellScript "keybind-viewer" ''
+    hyprctl binds -j | ${pkgs.jq}/bin/jq -r '
+      def decode_mod:
+        . as $m |
+        (if ($m / 64 | floor) % 2 == 1 then "Super+" else "" end) +
+        (if ($m / 8 | floor) % 2 == 1 then "Alt+" else "" end) +
+        (if ($m / 4 | floor) % 2 == 1 then "Ctrl+" else "" end) +
+        (if ($m % 2) == 1 then "Shift+" else "" end);
+      .[] |
+      (.modmask | decode_mod) as $mods |
+      ($mods + .key) as $combo |
+      if .description != "" then
+        $combo + " \u2192 " + .description
+      elif .dispatcher == "exec" then
+        ($combo + " \u2192 " + (.arg | split("/") | last | split(" ") | first))
+      else
+        $combo + " \u2192 " + .dispatcher + " " + .arg
+      end
+    ' | sort | rofi -dmenu -i -theme ~/.config/rofi/tokyo-night.rasi -p "Keybindings"
+  '';
 in
 {
   wayland.windowManager.hyprland = {
@@ -139,7 +198,7 @@ in
       bind = [
         # Window management
         "$mod, Q, killactive"
-        "$mod, V, togglefloating"
+        "$mod, T, togglefloating"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"
         "$mod, F, fullscreen"
@@ -197,10 +256,6 @@ in
         # Clipboard history
         "$mod SHIFT, V, exec, ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu -theme ~/.config/rofi/tokyo-night.rasi | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
 
-        # Notifications
-        "$mod, N, exec, swaync-client -t -sw"
-        "$mod SHIFT, N, exec, swaync-client -C"
-
         # Lock & power
         "$mod, L, exec, hyprlock"
         "$mod SHIFT, L, exec, ${powerMenu}"
@@ -208,6 +263,23 @@ in
         # Scroll through workspaces
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
+      ];
+
+      # Binds with descriptions (visible in Super+K viewer)
+      bindd = [
+        # Clipboard (Omarchy-style: sendshortcut with Ctrl/Shift+Insert)
+        "$mod, C, Copy, sendshortcut, CTRL, Insert,"
+        "$mod, V, Paste, sendshortcut, SHIFT, Insert,"
+        "$mod, X, Cut, sendshortcut, CTRL, X,"
+        "$mod CTRL, V, Clipboard history, exec, ${pkgs.cliphist}/bin/cliphist list | rofi -dmenu -theme ~/.config/rofi/tokyo-night.rasi | ${pkgs.cliphist}/bin/cliphist decode | ${pkgs.wl-clipboard}/bin/wl-copy"
+
+        # Notifications (mako)
+        "$mod, N, Dismiss notification, exec, makoctl dismiss"
+        "$mod SHIFT, N, Dismiss all notifications, exec, makoctl dismiss --all"
+
+        # System
+        "$mod ALT, space, System menu, exec, ${systemMenu}"
+        "$mod, K, Keybinding viewer, exec, ${keybindViewer}"
       ];
 
       # Repeatable binds for volume/brightness
@@ -233,78 +305,6 @@ in
         "$mod, mouse:273, resizewindow"
       ];
     };
-  };
-
-  # Notifications
-  services.swaync = {
-    enable = true;
-    settings = {
-      positionX = "right";
-      positionY = "top";
-      control-center-width = 400;
-      notification-window-width = 300;
-      notification-icon-size = 48;
-      notification-body-image-height = 100;
-      notification-body-image-width = 200;
-      timeout = 5;
-      timeout-low = 3;
-      timeout-critical = 0;
-      fit-to-screen = true;
-      keyboard-shortcuts = true;
-      image-visibility = "when-available";
-      transition-time = 200;
-      hide-on-clear = true;
-      hide-on-action = true;
-      script-fail-notify = true;
-    };
-    style = ''
-      * {
-        font-family: "JetBrainsMono Nerd Font";
-        font-size: 13px;
-      }
-      .notification-row {
-        outline: none;
-      }
-      .notification {
-        border-radius: 8px;
-        border: 2px solid #7aa2f7;
-        background: #1a1b26;
-        color: #a9b1d6;
-        margin: 4px;
-        padding: 8px;
-      }
-      .notification-content {
-        margin: 4px;
-      }
-      .close-button {
-        background: #292e42;
-        color: #a9b1d6;
-        border-radius: 50%;
-        margin: 4px;
-      }
-      .close-button:hover {
-        background: #f7768e;
-      }
-      .control-center {
-        background: #1a1b26;
-        border: 2px solid #7aa2f7;
-        border-radius: 8px;
-        color: #a9b1d6;
-      }
-      .control-center-list-placeholder {
-        color: #565f89;
-      }
-      .notification-group-headers {
-        color: #7aa2f7;
-      }
-      .widget-dnd > switch {
-        border-radius: 8px;
-        background: #292e42;
-      }
-      .widget-dnd > switch:checked {
-        background: #7aa2f7;
-      }
-    '';
   };
 
   # Night light
@@ -361,7 +361,6 @@ in
   };
 
   xdg.configFile."rofi/tokyo-night.rasi".source = ../files/rofi-tokyo-night.rasi;
-
 
   # Lock screen
   programs.hyprlock = {

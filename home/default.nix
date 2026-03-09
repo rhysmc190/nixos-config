@@ -21,6 +21,7 @@
           ./theme.nix
           ./gnome.nix
           ./hyprland.nix
+          ./mako.nix
           ./waybar.nix
           ./neovim.nix
           ./gpg.nix

@@ -44,14 +44,18 @@ in
   };
 
   security.polkit.enable = true;
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   # Stash the login password for gnome-keyring unlock (see stashGkPassword above)
   security.pam.services.login.rules.session.stash-gk-password = {
     order = 12650; # after gnome_keyring (12600)
     control = "optional";
     modulePath = "${pkgs.pam}/lib/security/pam_exec.so";
-    args = [ "expose_authtok" "quiet" "${stashGkPassword}" ];
+    args = [
+      "expose_authtok"
+      "quiet"
+      "${stashGkPassword}"
+    ];
   };
 
   # System-level key debounce via interception-tools (replaces GNOME bounce

@@ -5,7 +5,29 @@
     exec = "${pkgs.google-chrome}/bin/google-chrome-stable --incognito %U";
     icon = "google-chrome";
     comment = "Access the Internet in Incognito mode";
-    categories = [ "Network" "WebBrowser" ];
+    categories = [
+      "Network"
+      "WebBrowser"
+    ];
+  };
+
+  xdg.desktopEntries.claude = {
+    name = "Claude";
+    exec = "${pkgs.google-chrome}/bin/google-chrome-stable --app=https://claude.ai";
+    icon = "google-chrome";
+    comment = "Claude web app";
+    categories = [ "Network" ];
+  };
+
+  xdg.desktopEntries.whatsapp = {
+    name = "WhatsApp";
+    exec = "${pkgs.google-chrome}/bin/google-chrome-stable --app=https://web.whatsapp.com";
+    icon = "google-chrome";
+    comment = "WhatsApp Web app";
+    categories = [
+      "Network"
+      "Chat"
+    ];
   };
 
   home.packages = with pkgs; [
