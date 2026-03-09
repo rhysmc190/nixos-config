@@ -32,7 +32,7 @@
 
   home.packages = with pkgs; [
     # desktop
-    xfce.thunar
+    thunar
     variety
     wl-clipboard
 
