@@ -19,7 +19,6 @@
           ./terminal.nix
           ./vscode.nix
           ./theme.nix
-          ./gnome.nix
           ./hyprland.nix
           ./mako.nix
           ./waybar.nix

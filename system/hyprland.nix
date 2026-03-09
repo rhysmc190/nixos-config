@@ -22,9 +22,7 @@ let
     buildInputs = [ pkgs.openssl ];
   };
   # Stash the login password so Hyprland can unlock gnome-keyring.
-  # The PAM-started keyring daemon dies when GDM's session scope is cleaned
-  # up; Hyprland's exec-once reads this file to unlock a fresh daemon that
-  # persists in the compositor's scope.
+  # Hyprland's exec-once reads this file to unlock the keyring daemon.
   stashGkPassword = pkgs.writeShellScript "stash-gk-password" ''
     umask 0077
     cat > "''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/.gk-login"
@@ -33,7 +31,17 @@ in
 {
   programs.hyprland.enable = true;
 
-  services.displayManager.defaultSession = "hyprland";
+  # Login manager
+  services.greetd = {
+    enable = true;
+    settings.default_session = {
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+      user = "greeter";
+    };
+  };
+
+  # Forward login password to gpg-agent so GPG key is unlocked at login
+  security.pam.services.greetd.gnupg.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -58,8 +66,7 @@ in
     ];
   };
 
-  # System-level key debounce via interception-tools (replaces GNOME bounce
-  # keys, works under any compositor including Hyprland and GNOME).
+  # System-level key debounce via interception-tools
   services.interception-tools = {
     enable = true;
     plugins = [ debouncer-udevmon ];
