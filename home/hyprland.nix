@@ -205,7 +205,7 @@ in
 
         # Launch
         "$mod, Return, exec, ghostty"
-        "$mod, E, exec, nautilus"
+        "$mod, E, exec, thunar"
         "$mod, R, exec, rofi -show drun -display-drun \"\" -show-icons -theme ~/.config/rofi/tokyo-night.rasi"
         "$mod, space, exec, rofi -show drun -display-drun \"\" -show-icons -theme ~/.config/rofi/tokyo-night.rasi"
 

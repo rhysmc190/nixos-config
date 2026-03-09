@@ -33,6 +33,7 @@
   home.packages = with pkgs; [
     # desktop
     gnome-tweaks
+    xfce.thunar
     variety
     wl-clipboard
 
