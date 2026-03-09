@@ -7,6 +7,10 @@
   # gdm-password substacks to login, so gnupg must be enabled on login
   security.pam.services.login.gnupg.enable = true;
 
+  # Avahi/cups-browsed: not needed unless actively discovering network printers.
+  # CUPS itself is socket-activated (system/printing.nix).
+  services.avahi.enable = false;
+
   programs.dconf.enable = true;
 
   programs.kdeconnect = {

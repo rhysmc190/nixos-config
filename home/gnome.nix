@@ -24,6 +24,7 @@
     "evolution-source-registry".Unit.ConditionPathExists = "/nonexistent";
     "evolution-alarm-notify".Unit.ConditionPathExists = "/nonexistent";
     "evolution-user-prompter".Unit.ConditionPathExists = "/nonexistent";
+    "goa-daemon".Unit.ConditionPathExists = "/nonexistent";
   };
 
   dconf.settings = {
