@@ -21,6 +21,20 @@ let
     ];
     buildInputs = [ pkgs.openssl ];
   };
+  sddm-tokyo-night = pkgs.stdenvNoCC.mkDerivation {
+    pname = "sddm-tokyo-night";
+    version = "2024-03-06";
+    src = pkgs.fetchFromGitHub {
+      owner = "siddrs";
+      repo = "tokyo-night-sddm";
+      rev = "320c8e74ade1e94f640708eee0b9a75a395697c6";
+      hash = "sha256-JRVVzyefqR2L3UrEK2iWyhUKfPMUNUnfRZmwdz05wL0=";
+    };
+    installPhase = ''
+      mkdir -p $out/share/sddm/themes/tokyo-night-sddm
+      cp -r $src/* $out/share/sddm/themes/tokyo-night-sddm/
+    '';
+  };
   # Stash the login password so Hyprland can unlock gnome-keyring.
   # Hyprland's exec-once reads this file to unlock the keyring daemon.
   stashGkPassword = pkgs.writeShellScript "stash-gk-password" ''
@@ -31,31 +45,17 @@ in
 {
   programs.hyprland.enable = true;
 
-  # Login manager (regreet via greetd + cage)
-  programs.regreet = {
+  # Login manager
+  services.displayManager.sddm = {
     enable = true;
-    theme = {
-      name = "Tokyonight-Dark";
-      package = pkgs.tokyonight-gtk-theme;
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    cursorTheme = {
-      name = "Simp1e-Tokyo-Night-Storm";
-      package = pkgs.simp1e-cursors;
-    };
-    font = {
-      name = "JetBrainsMono Nerd Font";
-      package = pkgs.nerd-fonts.jetbrains-mono;
-      size = 13;
-    };
-    settings.GTK.application_prefer_dark_theme = true;
+    wayland.enable = true;
+    theme = "tokyo-night-sddm";
+    extraPackages = [ sddm-tokyo-night ];
+    package = pkgs.kdePackages.sddm;
   };
 
   # Forward login password to gpg-agent so GPG key is unlocked at login
-  security.pam.services.greetd.gnupg.enable = true;
+  security.pam.services.sddm.gnupg.enable = true;
 
   xdg.portal = {
     enable = true;
