@@ -15,6 +15,14 @@ let
       Shutdown) systemctl poweroff ;;
     esac
   '';
+  unlockKeyring = pkgs.writeShellScript "unlock-gnome-keyring" ''
+    PW="$XDG_RUNTIME_DIR/.gk-login"
+    if [ -f "$PW" ]; then
+      gnome-keyring-daemon --start --components=secrets
+      gnome-keyring-daemon --unlock < "$PW"
+      rm -f "$PW"
+    fi
+  '';
   setWallpaperScript = pkgs.writeShellScript "set-wallpaper" ''
     WP="$1"
     hyprctl hyprpaper preload "$WP"
@@ -104,6 +112,7 @@ in
       };
 
       exec-once = [
+        "${unlockKeyring}"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store"
         "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store"

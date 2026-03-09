@@ -7,10 +7,6 @@
   # gdm-password substacks to login, so gnupg must be enabled on login
   security.pam.services.login.gnupg.enable = true;
 
-  # Unlock gnome-keyring at GDM login so libsecret (git credentials etc.)
-  # works in non-GNOME sessions like Hyprland
-  security.pam.services.gdm-password.enableGnomeKeyring = true;
-
   programs.dconf.enable = true;
 
   programs.kdeconnect = {

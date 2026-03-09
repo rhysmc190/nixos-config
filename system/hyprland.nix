@@ -21,6 +21,14 @@ let
     ];
     buildInputs = [ pkgs.openssl ];
   };
+  # Stash the login password so Hyprland can unlock gnome-keyring.
+  # The PAM-started keyring daemon dies when GDM's session scope is cleaned
+  # up; Hyprland's exec-once reads this file to unlock a fresh daemon that
+  # persists in the compositor's scope.
+  stashGkPassword = pkgs.writeShellScript "stash-gk-password" ''
+    umask 0077
+    cat > "''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/.gk-login"
+  '';
 in
 {
   programs.hyprland.enable = true;
@@ -36,6 +44,14 @@ in
   };
 
   security.polkit.enable = true;
+
+  # Stash the login password for gnome-keyring unlock (see stashGkPassword above)
+  security.pam.services.login.rules.session.stash-gk-password = {
+    order = 12650; # after gnome_keyring (12600)
+    control = "optional";
+    modulePath = "${pkgs.pam}/lib/security/pam_exec.so";
+    args = [ "expose_authtok" "quiet" "${stashGkPassword}" ];
+  };
 
   # System-level key debounce via interception-tools (replaces GNOME bounce
   # keys, works under any compositor including Hyprland and GNOME).
