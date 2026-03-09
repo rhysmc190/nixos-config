@@ -1,5 +1,13 @@
 { pkgs, ... }:
 {
+  xdg.desktopEntries.google-chrome-incognito = {
+    name = "Google Chrome (Incognito)";
+    exec = "${pkgs.google-chrome}/bin/google-chrome-stable --incognito %U";
+    icon = "google-chrome";
+    comment = "Access the Internet in Incognito mode";
+    categories = [ "Network" "WebBrowser" ];
+  };
+
   home.packages = with pkgs; [
     # desktop
     adwaita-icon-theme
