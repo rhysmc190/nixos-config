@@ -101,6 +101,8 @@ in
 
       env = [
         "QT_QPA_PLATFORM,wayland;xcb"
+        "QT_QPA_PLATFORMTHEME,adwaita"
+        "QT_STYLE_OVERRIDE,adwaita-dark"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         "GDK_BACKEND,wayland,x11,*"
       ];

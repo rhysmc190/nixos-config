@@ -10,7 +10,6 @@
 
   home.packages = with pkgs; [
     # desktop
-    adwaita-icon-theme
     gnome-tweaks
     variety
     wl-clipboard
