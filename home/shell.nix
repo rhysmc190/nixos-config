@@ -20,7 +20,7 @@
     enableCompletion = true;
     initContent = ''
       if [[ -n "$SSH_CONNECTION" && -z "$TMUX" ]]; then
-        tmux new-session -A
+        tmux attach || tmux new-session
       fi
     '';
     autosuggestion.enable = true;
