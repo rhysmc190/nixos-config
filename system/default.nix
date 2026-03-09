@@ -10,7 +10,7 @@
     ./framework.nix
     ./networking.nix
     ./locale.nix
-    ./gnome.nix
+    ./desktop-services.nix
     ./hyprland.nix
     ./audio.nix
     ./bluetooth.nix
