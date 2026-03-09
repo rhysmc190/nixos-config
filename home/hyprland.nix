@@ -318,9 +318,9 @@ in
     };
   };
 
-  # Idle management (disabled — was auto-locking after timeout)
+  # Idle management
   services.hypridle = {
-    enable = false;
+    enable = true;
     settings = {
       general = {
         lock_cmd = "pidof hyprlock || hyprlock";
@@ -378,6 +378,11 @@ in
           blur_size = 8;
         }
       ];
+      fingerprint = {
+        enabled = true;
+        ready_message = "(Scan fingerprint to unlock)";
+        present_message = "Scanning...";
+      };
       input-field = [
         {
           monitor = "";

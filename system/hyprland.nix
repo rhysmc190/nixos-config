@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   # Keyboard debounce plugin for interception-tools. Delays key-release events
   # by a configurable window; if a re-press arrives during that window it's
@@ -47,7 +47,7 @@ in
   };
 
   security.polkit.enable = true;
-  security.pam.services.hyprlock = { };
+  security.pam.services.hyprlock.rules.auth.fprintd.enable = lib.mkForce false;
 
   # Stash the login password for gnome-keyring unlock (see stashGkPassword above)
   security.pam.services.login.rules.session.stash-gk-password = {
