@@ -11,6 +11,8 @@
       keybind = [
         "ctrl+enter=toggle_window_decorations"
         "ctrl+shift+enter=toggle_fullscreen"
+        "ctrl+insert=copy_to_clipboard"
+        "shift+insert=paste_from_clipboard"
       ];
     };
   };
