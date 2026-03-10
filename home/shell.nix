@@ -48,6 +48,7 @@
       ll = "eza -l";
       ls = "eza";
       tree = "eza --tree";
+      gpg-unlock = ''echo "" | gpg -s > /dev/null'';
     };
   };
 
