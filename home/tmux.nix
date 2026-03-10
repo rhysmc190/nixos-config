@@ -23,6 +23,11 @@ in
     fi
   '';
 
+  # Ensure all sessions use the same socket directory (tmux default: /tmp/tmux-$UID).
+  # Without this, systemd sets TMUX_TMPDIR=/run/user/$UID in some contexts but not
+  # others, causing separate tmux servers for local vs SSH sessions.
+  home.sessionVariables.TMUX_TMPDIR = lib.mkForce "";
+
   programs.tmux = {
     enable = true;
     mouse = true;
