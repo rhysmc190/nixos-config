@@ -95,8 +95,8 @@ in
     settings = {
       # Monitors: laptop + external Dell (verify DP name with `hyprctl monitors all`)
       monitor = [
-        "eDP-1, 2256x1504@60, 0x0, 1.57"
-        "DP-6, 1920x1080@60, 1440x0, 1"
+        "eDP-1, 2256x1504@60, 1920x0, 1.57"
+        "desc:Dell Inc. DELL P2719H 5R0DVS2, 1920x1080@60, 0x0, 1"
         ", preferred, auto, 1" # fallback for any other monitor
       ];
 
@@ -190,7 +190,7 @@ in
         "float true, match:title ^(Confirm)$"
         "opacity 0.9 0.85, match:class ^(com.mitchellh.ghostty)$"
         "no_blur true, match:class ^(com.mitchellh.ghostty)$"
-        "monitor DP-6, match:class ^(com.mitchellh.ghostty)$"
+        "monitor desc:Dell Inc. DELL P2719H 5R0DVS2, match:class ^(com.mitchellh.ghostty)$"
       ];
 
       "$mod" = "SUPER";
