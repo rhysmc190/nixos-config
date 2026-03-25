@@ -75,7 +75,7 @@ in
 
   # Debouncer config: 30ms delay, exclude modifier keys from debouncing
   environment.etc."debouncer.toml".text = ''
-    debounce_time = 50
+    debounce_time = 70
     exceptions = [29, 42, 54, 56, 97, 100, 125]
   '';
 }
