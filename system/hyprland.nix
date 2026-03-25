@@ -65,21 +65,16 @@ in
   services.interception-tools = {
     enable = true;
     plugins = [ debouncer-udevmon ];
-    udevmonConfig = builtins.toJSON [
-      {
-        JOB = "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${debouncer-udevmon}/bin/debouncer-udevmon | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE";
-        DEVICE = {
-          EVENTS = {
-            EV_KEY = [ [ 0 767 ] ];
-          };
-        };
-      }
-    ];
+    udevmonConfig = ''
+      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${debouncer-udevmon}/bin/debouncer-udevmon | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+        DEVICE:
+          NAME: ".*[Kk]eyboard.*"
+    '';
   };
 
   # Debouncer config: 30ms delay, exclude modifier keys from debouncing
   environment.etc."debouncer.toml".text = ''
-    debounce_time = 70
+    debounce_time = 30
     exceptions = [29, 42, 54, 56, 97, 100, 125]
   '';
 }
