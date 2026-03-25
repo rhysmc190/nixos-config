@@ -1,4 +1,14 @@
 { pkgs, ... }:
+let
+  claudeIcon = pkgs.fetchurl {
+    url = "https://claude.ai/apple-touch-icon.png";
+    hash = "sha256-3MWCcZIHUEQa/UICaARa3bWT7gHmi04FoT9++s5+ZdM=";
+  };
+  spacemailIcon = pkgs.fetchurl {
+    url = "https://spacemail.com/apple-touch-icon.png";
+    hash = "sha256-aQfWUojw79PIRAIV5Dfs+5VwHnRdyqy72lNI7sLqlLY=";
+  };
+in
 {
   xdg.desktopEntries.google-chrome-incognito = {
     name = "Google Chrome (Incognito)";
@@ -14,7 +24,7 @@
   xdg.desktopEntries.claude = {
     name = "Claude";
     exec = "${pkgs.google-chrome}/bin/google-chrome-stable --app=https://claude.ai";
-    icon = "google-chrome";
+    icon = "${claudeIcon}";
     comment = "Claude web app";
     categories = [ "Network" ];
   };
@@ -22,12 +32,52 @@
   xdg.desktopEntries.whatsapp = {
     name = "WhatsApp";
     exec = "${pkgs.google-chrome}/bin/google-chrome-stable --app=https://web.whatsapp.com";
-    icon = "google-chrome";
+    icon = "whatsapp";
     comment = "WhatsApp Web app";
     categories = [
       "Network"
       "Chat"
     ];
+  };
+
+  xdg.desktopEntries.gmail = {
+    name = "Gmail";
+    exec = "${pkgs.google-chrome}/bin/google-chrome-stable --app=https://mail.google.com";
+    icon = "gmail";
+    comment = "Gmail web app";
+    categories = [ "Network" "Email" ];
+  };
+
+  xdg.desktopEntries.protonmail = {
+    name = "ProtonMail";
+    exec = "${pkgs.google-chrome}/bin/google-chrome-stable --app=https://mail.proton.me";
+    icon = "proton-mail";
+    comment = "ProtonMail web app";
+    categories = [ "Network" "Email" ];
+  };
+
+  xdg.desktopEntries.spacemail = {
+    name = "Spacemail";
+    exec = "${pkgs.google-chrome}/bin/google-chrome-stable --app=https://spacemail.com/mail";
+    icon = "${spacemailIcon}";
+    comment = "Spacemail web app";
+    categories = [ "Network" "Email" ];
+  };
+
+  xdg.desktopEntries.github = {
+    name = "GitHub";
+    exec = "${pkgs.google-chrome}/bin/google-chrome-stable --app=https://github.com";
+    icon = "github";
+    comment = "GitHub web app";
+    categories = [ "Network" "Development" ];
+  };
+
+  xdg.desktopEntries.mail = {
+    name = "Mail";
+    exec = "${pkgs.google-chrome}/bin/google-chrome-stable --new-window https://mail.google.com https://mail.proton.me https://spacemail.com/mail";
+    icon = "internet-mail";
+    comment = "All mail clients";
+    categories = [ "Network" "Email" ];
   };
 
   home.packages = with pkgs; [
