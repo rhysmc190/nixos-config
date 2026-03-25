@@ -178,7 +178,7 @@ in
         "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store"
         "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store"
         "install -Dm755 ${setWallpaperScript} ~/.config/variety/scripts/set_wallpaper && variety"
-        "ghostty -e ${ghosttyStartScript}"
+        "ghostty --title=Ghostty -e ${ghosttyStartScript}"
         "kdeconnect-indicator"
       ];
 
