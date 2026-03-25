@@ -65,12 +65,16 @@ in
   services.interception-tools = {
     enable = true;
     plugins = [ debouncer-udevmon ];
-    udevmonConfig = ''
-      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${debouncer-udevmon}/bin/debouncer-udevmon | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
-        DEVICE:
-          EVENTS:
-            EV_KEY: [[KEY_RESERVED, KEY_MAX]]
-    '';
+    udevmonConfig = builtins.toJSON [
+      {
+        JOB = "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${debouncer-udevmon}/bin/debouncer-udevmon | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE";
+        DEVICE = {
+          EVENTS = {
+            EV_KEY = [ [ 0 767 ] ];
+          };
+        };
+      }
+    ];
   };
 
   # Debouncer config: 30ms delay, exclude modifier keys from debouncing
