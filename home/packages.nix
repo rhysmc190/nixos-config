@@ -5,8 +5,8 @@ let
     hash = "sha256-3MWCcZIHUEQa/UICaARa3bWT7gHmi04FoT9++s5+ZdM=";
   };
   spacemailIcon = pkgs.fetchurl {
-    url = "https://spacemail.com/apple-touch-icon.png";
-    hash = "sha256-aQfWUojw79PIRAIV5Dfs+5VwHnRdyqy72lNI7sLqlLY=";
+    url = "https://spaceship-cdn.com/static/spacemail/favicon/apple-touch-icon.png";
+    hash = "sha256-UFVqXaNbYPUcUkz7qWQJbZvUmChvcZ0vAVrAGawpn9s=";
   };
 in
 {
