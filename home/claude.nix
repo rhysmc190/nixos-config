@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   ccusage = pkgs.writeShellScriptBin "ccusage" ''
-    exec ${pkgs.nodePackages.pnpm}/bin/pnpm dlx ccusage "$@"
+    exec ${pkgs.pnpm}/bin/pnpm dlx ccusage "$@"
   '';
 
   agentStateCmd =

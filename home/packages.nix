@@ -115,7 +115,7 @@ in
     just
     nh
     nodejs_20
-    nodePackages.eas-cli
+    eas-cli
     python3
     supabase-cli
     watchman
